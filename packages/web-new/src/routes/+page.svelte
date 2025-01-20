@@ -117,7 +117,8 @@
 				<Benben {...$randomBenben.data} />
 			{/if}
 			<h2 class="my-2 text-xl">爬虫状态</h2>
-			<ul>
+			<div>由于洛谷 API 的更改，爬虫已经关闭。</div>
+			<!-- <ul>
 				<li>
 					轮询抓取器：
 					{#if $procStat.isLoading}
@@ -144,7 +145,7 @@
 						{/if}
 					{/if}
 				</li>
-			</ul>
+			</ul> -->
 		</div>
 		<div class="lg:col-span-2">
 			<Advertising />

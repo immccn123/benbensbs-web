@@ -82,7 +82,6 @@
 					<input
 						type="text"
 						bind:value={keyword}
-						placeholder="不区分大小写"
 						class="input input-bordered w-full"
 					/>
 				</div>
