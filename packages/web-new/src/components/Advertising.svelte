@@ -29,6 +29,11 @@
 			alt: 'lymph-c1 解迷群 群号 312692217',
 			href: 'https://qm.qq.com/q/Ktfwqoqqke'
 		},
+		{
+			src: 'https://static.imken.moe/bensite-advertising/te.webp',
+			alt: 'Tianyunn BBS',
+			href: 'http://www.tianyunn.top'
+		},
 	]);
 
 	let activeItem = 0;
