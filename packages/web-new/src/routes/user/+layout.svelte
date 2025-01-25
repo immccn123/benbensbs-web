@@ -2,12 +2,15 @@
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { initialUid, isLoading } from './store';
+	import { addNotification } from '$lib/state/notifications';
 
 	$: uid = $initialUid ?? '';
 
 	onMount(() => {
 		return () => ($initialUid = uid);
 	});
+
+	let isFetching = false;
 </script>
 
 <div class="container mx-auto">
@@ -27,7 +30,20 @@
 				disabled={$isLoading || uid === '' || uid === null}
 				type="submit"
 			>
-				Go!
+				查询
+			</button>
+			<button
+				class="btn join-item"
+				on:click={() => {
+					isFetching = true;
+					fetch(`https://spider.benben.sbs/${uid}`)
+						.then(() => addNotification('success', '成功'))
+						.catch(() => addNotification('error', '出了些问题。请稍候再试。'))
+						.finally(() => (isFetching = false));
+				}}
+				disabled={isFetching || $isLoading || uid === '' || uid === null}
+			>
+				请求抓取
 			</button>
 		</div>
 	</form>

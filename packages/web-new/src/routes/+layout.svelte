@@ -41,13 +41,9 @@
 					</div>
 				</div>
 				<div class="main-content flex h-full flex-col">
-					<div role="alert" class="alert alert-warning">
+					<div role="alert" class="alert alert-success">
 						<div>
-							由于洛谷 API
-							出现重大变更，犇站的保存机制将失效（哭）网站将不再抓取新的犇犇，但是仍将继续运行。<span
-								class="inline-block">非常抱歉&lt;(＿　＿)&gt;</span
-							><br />
-							预计犇犇在之后会变成针对用户手动保存的模式，可能不再有自动抓取。新的逻辑应该会在春节前后重构并上线！
+							爬虫已经恢复！您可以在首页或者用户历史页面选择对某用户的犇犇进行抓取，但是由于爬虫的队列机制，请求需要排队。
 						</div>
 					</div>
 					<main class="z-0 p-3">

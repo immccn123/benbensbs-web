@@ -2,8 +2,7 @@
 	import { createQuery } from '@tanstack/svelte-query';
 	import Benben from '../components/Benben.svelte';
 	import MdiRefresh from '~icons/mdi/refresh';
-	import { createFetcher, isProcessDied } from '$lib';
-	import ProcStatusBadge from '../components/ProcStatusBadge.svelte';
+	import { createFetcher } from '$lib';
 	import { addNotification } from '$lib/state/notifications';
 	import { PUBLIC_API_BASE } from '$env/static/public';
 	import MdiCubeScan from '~icons/mdi/cube-scan';
@@ -25,22 +24,8 @@
 		refetchOnWindowFocus: false
 	});
 
-	const procStat = createQuery<API.ProcStatus>({
-		queryKey: ['/proc/status'],
-		queryFn: createFetcher(`/proc/status`),
-		refetchInterval: 5000
-	});
-
-	function restartProcess(proc: 'fetcher' | 'loop') {
-		addNotification('success', '已经发出启动进程请求');
-		fetch(`${PUBLIC_API_BASE}/proc/start?proc=${proc}`)
-			.catch((e) => {
-				addNotification('error', String(e));
-			})
-			.finally(() => {
-				$procStat.refetch();
-			});
-	}
+	let uid = '';
+	let isFetching = false;
 
 	setTitle('首页');
 </script>
@@ -95,9 +80,8 @@
 			{/if}
 		</button>
 	</h2>
-	<div class="row-auto grid grid-flow-row lg:grid-cols-4 items-stretch gap-2">
-		<div class="lg:col-span-2 h-full">
-
+	<div class="row-auto grid grid-flow-row items-stretch gap-2 lg:grid-cols-4">
+		<div class="h-full lg:col-span-2">
 			{#if $randomBenben.isLoading}
 				<div class="card card-compact border">
 					<div class="card-body">
@@ -116,36 +100,28 @@
 			{:else if $randomBenben.isSuccess}
 				<Benben {...$randomBenben.data} />
 			{/if}
-			<h2 class="my-2 text-xl">爬虫状态</h2>
-			<div>由于洛谷 API 的更改，爬虫已经关闭。</div>
-			<!-- <ul>
-				<li>
-					轮询抓取器：
-					{#if $procStat.isLoading}
-						<span class="loading loading-ring loading-sm"></span>
-					{:else if $procStat.isSuccess}
-						<ProcStatusBadge status={$procStat.data.fetcher_status} />
-						{#if isProcessDied($procStat.data.fetcher_status)}
-							<button class="btn btn-xs" on:click={() => restartProcess('fetcher')}>
-								重新启动
-							</button>
-						{/if}
-					{/if}
-				</li>
-				<li>
-					循环抓取器：
-					{#if $procStat.isLoading}
-						<span class="loading loading-ring loading-sm"></span>
-					{:else if $procStat.isSuccess}
-						<ProcStatusBadge status={$procStat.data.loop_status} />
-						{#if isProcessDied($procStat.data.loop_status)}
-							<button class="btn btn-xs" on:click={() => restartProcess('loop')}>
-								重新启动
-							</button>
-						{/if}
-					{/if}
-				</li>
-			</ul> -->
+			<h2 class="my-2 text-xl">添加抓取任务</h2>
+			<div class="join w-full">
+				<input
+					type="number"
+					placeholder="UID"
+					bind:value={uid}
+					class="input join-item input-bordered w-full"
+				/>
+				<button
+					class="btn join-item"
+					on:click={() => {
+						isFetching = true;
+						fetch(`https://spider.benben.sbs/${uid}`)
+							.then(() => addNotification('success', '成功'))
+							.catch(() => addNotification('error', '出了些问题。请稍候再试。'))
+							.finally(() => (isFetching = false));
+					}}
+					disabled={isFetching}
+				>
+					抓取
+				</button>
+			</div>
 		</div>
 		<div class="lg:col-span-2">
 			<Advertising />
