@@ -3,43 +3,53 @@
 	import { fade } from 'svelte/transition';
 	import chance from 'chance';
 
-	const items = chance(new Date().toDateString()).shuffle([
-		{
-			src: '/advertising.webp',
-			alt: '广告位招租',
-			href: 'https://qm.qq.com/q/f2Wp6MF5lu'
-		},
-		{
-			src: 'https://static.imken.moe/bensite-advertising/blikznxt-exp20241130.webp',
-			alt: 'Ad by 501947',
-			href: 'https://www.luogu.com.cn/user/727558'
-		},
-		{
-			src: 'https://static.imken.moe/bensite-advertising/7-365654-exp241231.png',
-			alt: 'Sleeping Cup - by 365654',
-			href: 'http://8.136.99.126'
-		},
-		{
-			src: 'https://static.imken.moe/bensite-advertising/test8.webp',
-			alt: 'OIer 观测者交流群 群号 946034915',
-			href: 'https://qm.qq.com/q/dAxBet1PE'
-		},
-		{
-			src: 'https://static.imken.moe/bensite-advertising/ad241128.webp',
-			alt: 'lymph-c1 解迷群 群号 312692217',
-			href: 'https://qm.qq.com/q/Ktfwqoqqke'
-		},
-		{
-			src: 'https://static.imken.moe/bensite-advertising/te.webp',
-			alt: 'Tianyunn BBS',
-			href: 'http://www.tianyunn.top'
-		},
+	const trending = [
 		{
 			src: 'https://static.imken.moe/bensite-advertising/printboard1.webp',
 			alt: '冬日绘板 - 世末歌者 / Phigros 维护计划',
 			href: 'https://www.luogu.com.cn/paste/16kgthp1'
-		},
-	]);
+		}
+	];
+
+	const items: {
+		src: string;
+		alt: string;
+		href: string;
+	}[] = Array.prototype.concat(
+		trending,
+		chance(new Date().toDateString()).shuffle([
+			{
+				src: '/advertising.webp',
+				alt: '广告位招租',
+				href: 'https://qm.qq.com/q/f2Wp6MF5lu'
+			},
+			{
+				src: 'https://static.imken.moe/bensite-advertising/blikznxt-exp20241130.webp',
+				alt: 'Ad by 501947',
+				href: 'https://www.luogu.com.cn/user/727558'
+			},
+			{
+				src: 'https://static.imken.moe/bensite-advertising/7-365654-exp241231.png',
+				alt: 'Sleeping Cup - by 365654',
+				href: 'http://8.136.99.126'
+			},
+			{
+				src: 'https://static.imken.moe/bensite-advertising/test8.webp',
+				alt: 'OIer 观测者交流群 群号 946034915',
+				href: 'https://qm.qq.com/q/dAxBet1PE'
+			},
+			{
+				src: 'https://static.imken.moe/bensite-advertising/ad241128.webp',
+				alt: 'lymph-c1 解迷群 群号 312692217',
+				href: 'https://qm.qq.com/q/Ktfwqoqqke'
+			},
+			{
+				src: 'https://static.imken.moe/bensite-advertising/te.webp',
+				alt: 'Tianyunn BBS',
+				href: 'http://www.tianyunn.top'
+			}
+		])
+	);
 
 	let activeItem = 0;
 	let interval: number | NodeJS.Timeout;
