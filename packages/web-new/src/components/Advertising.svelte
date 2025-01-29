@@ -34,6 +34,11 @@
 			alt: 'Tianyunn BBS',
 			href: 'http://www.tianyunn.top'
 		},
+		{
+			src: 'https://static.imken.moe/bensite-advertising/printboard1.webp',
+			alt: '冬日绘板 - 世末歌者 / Phigros 维护计划',
+			href: 'https://www.luogu.com.cn/paste/16kgthp1'
+		},
 	]);
 
 	let activeItem = 0;
