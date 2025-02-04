@@ -3,13 +3,7 @@
 	import { fade } from 'svelte/transition';
 	import chance from 'chance';
 
-	const trending = [
-		{
-			src: 'https://static.imken.moe/bensite-advertising/printboard1.webp',
-			alt: '冬日绘板 - 世末歌者 / Phigros 维护计划',
-			href: 'https://www.luogu.com.cn/paste/16kgthp1'
-		}
-	];
+	const trending = [];
 
 	const items: {
 		src: string;
