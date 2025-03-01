@@ -10,14 +10,15 @@
 	import Ad from '../../components/Ad.svelte';
 	import { setTitle } from '$lib/state/title';
 
-	export let data;
-	let keyword = data.keyword ?? '';
-	let senderText = data.senderText ?? '';
-	let dateBefore = data.dateBefore;
-	let dateAfter = data.dateAfter;
-	let results: API.Benben[] = [];
+	let { data } = $props();
 
-	if (keyword) setTitle(`检索 ${keyword} 的结果`);
+	let keyword: string = $state(data.keyword ?? '');
+	let senderText: string = $state(data.senderText ?? '');
+	let dateBefore: string = $state(data.dateBefore ?? '');
+	let dateAfter: string = $state(data.dateAfter ?? '');
+	let results: API.Benben[] = $state([]);
+
+	if (data.keyword) setTitle(`检索 ${data.keyword} 的结果`);
 	else setTitle(`检索`);
 
 	const params = (search: boolean = false, loadMore = false) => {
@@ -40,23 +41,27 @@
 		return queryParams.join('&');
 	};
 
-	const query = createInfiniteQuery<API.Benben[]>({
-		queryKey: ['searchResults', keyword, dateBefore, senderText, dateAfter],
-		queryFn: async ({ pageParam }) =>
-			createFetcher<API.Benben[]>(`/search/db?${params(false, pageParam as boolean)}`)(),
-		getNextPageParam: (lastPage) => (lastPage.length === 50 ? true : undefined),
-		initialPageParam: false,
-		refetchInterval: 0,
-		refetchOnMount: false,
-		refetchIntervalInBackground: false,
-		refetchOnWindowFocus: false,
-		refetchOnReconnect: false
-	});
+	const query = $derived(
+		createInfiniteQuery<API.Benben[]>({
+			queryKey: ['searchResults', keyword, dateBefore, senderText, dateAfter],
+			queryFn: async ({ pageParam }) =>
+				createFetcher<API.Benben[]>(`/search/db?${params(false, pageParam as boolean)}`)(),
+			getNextPageParam: (lastPage) => (lastPage.length === 50 ? true : undefined),
+			initialPageParam: false,
+			refetchInterval: 0,
+			refetchOnMount: false,
+			refetchIntervalInBackground: false,
+			refetchOnWindowFocus: false,
+			refetchOnReconnect: false
+		})
+	);
 
-	$: queryData = $query.data?.pages.flat();
-	$: isFetching = $query.isFetching;
-	$: isLoading = $query.isLoading || $query.isRefetching;
-	$: results = queryData ?? [];
+	let queryData = $derived($query.data?.pages.flat());
+	let isFetching = $derived($query.isFetching);
+	let isLoading = $derived($query.isLoading || $query.isRefetching);
+	$effect(() => {
+		results = queryData ?? [];
+	});
 
 	const loadMore = async () => {
 		$query.fetchNextPage();
@@ -64,7 +69,7 @@
 
 	const searchHandler = () => {
 		goto(`/search?${params(true)}`);
-		queryData = [];
+		queryData && (queryData.length = 0);
 		$query.refetch();
 	};
 </script>
