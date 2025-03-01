@@ -12,7 +12,7 @@
 	);
 </script>
 
-<div role="tablist" class="tabs tabs-boxed mt-3" data-theme="light">
+<div role="tablist" class="tabs tabs-box mt-3" data-theme="light">
 	<a role="tab" class="tab" href="/user/{data.id}/{data.page}" class:tab-active={!data.analytics}>
 		动态
 	</a>

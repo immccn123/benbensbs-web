@@ -28,7 +28,7 @@
 </script>
 
 <div
-	class="card card-compact text-wrap break-words border {join && 'join-item'} {fit && 'h-full'}"
+	class="card card-border card-sm text-wrap break-words {join && 'join-item'} {fit && 'h-full'}"
 	bind:this={benben}
 >
 	<div class="card-body">

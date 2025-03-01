@@ -14,7 +14,7 @@
 	class="
 		menu menu-md bg-base-100 z-50 flex min-h-full
 		overflow-hidden max-lg:w-56 lg:fixed lg:top-0
-		lg:w-[4.5rem] lg:shadow lg:hover:w-56
+		lg:w-[4rem] lg:shadow lg:hover:w-56
 		lg:hover:shadow-xl lg:motion-safe:transition-[all!important]
 	"
 >

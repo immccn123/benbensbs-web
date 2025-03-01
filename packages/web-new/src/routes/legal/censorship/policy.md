@@ -4,16 +4,16 @@
 
 申请步骤如下：
 
-1. **提交申请**：请通过电子邮件（`me#imken.moe`，`#` = `@`）联系我们，邮件内容需包含以下信息：
+1. **提交申请**：  
+   请填写页面底部的表单。  
+   或者通过电子邮件（`me#imken.moe`，`#` = `@`）联系我们，邮件内容需包含以下信息：  
    - 需要屏蔽的犇犇 ID
    - 您的姓名或代表身份以及您的洛谷 UID
    - 您的联系方式（QQ 或电子邮件）
    - 相关数据的具体描述及页面链接
    - 申请屏蔽的理由与相关证明材料（如必要）
    - 需要展示给访客的信息（不一定会完全采纳）
-
 2. **审核与处理**：我们将在收到您的申请后尽快审核，并根据情况进行核实。一般来说，审核时间不超过 15 个工作日，在审核完成后，我们会通知您处理结果。您可能需要协助我们证明您的身份。
-
 3. **处理结果**：如果您的申请符合屏蔽条件，我们将立即在站点中屏蔽相关数据。如果无法屏蔽或存在其他问题，我们也会提供相关解释和解决方案。
 
 我们 **不会** 删除数据，仅仅是添加记录以阻止所有访客查看此条数据。
@@ -33,3 +33,5 @@
 涉及下列情形的申请不会被受理：
 
 1. 需要被屏蔽的犇犇没有在洛谷中被删除。
+
+<iframe width="640px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__SE8hcNUQ0lSOUFHQVk5M0w1WDM3RE5TUERGUFJaUi4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>

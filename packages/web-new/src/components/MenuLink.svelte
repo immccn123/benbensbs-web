@@ -1,19 +1,24 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { afterNavigate } from '$app/navigation';
+	import { page } from '$app/state';
 
-	$: pathname = $page.url.pathname;
+	afterNavigate(() => {
+		pathname = page.url.pathname;
+	});
+
+	let pathname = page.url.pathname;
 
 	export let to: string | undefined = undefined;
 	export let title = false;
 	export let fullMatch = false;
 </script>
 
-<li class:disabled={to === undefined} class:menu-title={title}>
+<li class:menu-disabled={to === undefined} class:menu-title={title}>
 	{#if to !== undefined}
 		<a
 			class="overflow-hidden text-nowrap"
 			href={to}
-			class:active={fullMatch ? pathname === to : pathname.startsWith(to)}
+			class:menu-active={fullMatch ? pathname === to : pathname.startsWith(to)}
 		>
 			{#if $$slots.icon}
 				<slot name="icon"></slot>

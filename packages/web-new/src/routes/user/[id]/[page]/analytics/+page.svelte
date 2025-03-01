@@ -52,8 +52,8 @@
 	</div>
 
 	<div class="overflow-x-auto">
-		<h2 class="mb-2 text-xl">Heatmap</h2>
-		<div class="card border">
+		<h2 class="mb-2 text-xl">热力图</h2>
+		<div class="card card-border">
 			<div class="card-body w-full overflow-x-auto">
 				{#if $heatmap.isLoading}
 					<div class="loading loading-ring loading-lg"></div>

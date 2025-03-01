@@ -66,25 +66,30 @@
 	{/if}
 </div>
 
-<div class="card card-compact bg-base-100 w-120 sticky bottom-2 mt-2 shadow">
-	<div class="card-body">
-		<div class="join justify-center">
-			<a class="join-item btn {$isLoading && 'btn-disabled'}" href="/user/{uid}/1">
-				<MdiPageFirst />
-			</a>
-			{#each pagesNavigation as p}
-				<a
-					class="
-						join-item btn {p === page && 'btn-active'}
-						{$isLoading && 'btn-disabled'}"
-					href="/user/{uid}/{p}"
-				>
-					{p}
+<div class="sticky bottom-2 mt-2 flex items-end justify-center">
+	<div class="card card-sm bg-base-100 w-120 shadow card-border">
+		<div class="card-body">
+			<div class="join justify-center">
+				<a class="join-item btn {$isLoading && 'btn-disabled'}" href="/user/{uid}/1">
+					<MdiPageFirst />
 				</a>
-			{/each}
-			<a class="join-item btn {$isLoading && 'btn-disabled'}" href="/user/{uid}/{pageLimit}">
-				<MdiPageLast />
-			</a>
+				{#each pagesNavigation as p}
+					<a
+						class="
+							join-item btn {p === page && 'btn-active'}
+							{$isLoading && 'btn-disabled'}"
+						href="/user/{uid}/{p}"
+					>
+						{p}
+					</a>
+				{/each}
+				<a
+					class="join-item btn {$isLoading && 'btn-disabled'}"
+					href="/user/{uid}/{pageLimit}"
+				>
+					<MdiPageLast />
+				</a>
+			</div>
 		</div>
 	</div>
 </div>

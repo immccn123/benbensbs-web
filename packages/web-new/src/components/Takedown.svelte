@@ -1,11 +1,9 @@
 <script lang="ts">
-	import MdiRemove from '~icons/mdi/remove';
 	import MarkdownIt from 'markdown-it';
 	import { onMount } from 'svelte';
 
 	export let takedown: API.TakedownInfo;
-	export let join = false;
-	export let benbenId;
+	export let benbenId: string;
 	let origin = 'https://benben.sbs';
 
 	onMount(() => {
@@ -13,7 +11,7 @@
 	});
 </script>
 
-<div class="card card-compact text-wrap break-words border {join && 'join-item'}">
+<div class="card card-sm card-border text-wrap break-words">
 	<div class="card-body">
 		<article class="prose">
 			<p>{@html new MarkdownIt().render(takedown.reason)}</p>

@@ -13,7 +13,7 @@
 	});
 </script>
 
-<div class="card card-compact {border && 'border'} {join && 'join-item'}">
+<div class="card card-sm {border && 'border'} {join && 'join-item'}">
 	<div class="card-body ad">
 		{#if flow}
 			<ins

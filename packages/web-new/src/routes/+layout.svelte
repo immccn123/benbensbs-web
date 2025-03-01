@@ -11,6 +11,7 @@
 	import HeadTitle from '../components/HeadTitle.svelte';
 	import ShareDialog from '../components/ShareDialog.svelte';
 	import MarkdownDialog from '../components/MarkdownDialog.svelte';
+	import Announcement from '../components/Announcement.svelte';
 
 	systemPrefersMode.subscribe((value) => {
 		if (value === 'light') document.body.setAttribute('data-theme', 'lofi');
@@ -29,7 +30,7 @@
 		<div class="drawer lg:drawer-open">
 			<input id="sidebar-toggle" type="checkbox" class="drawer-toggle" />
 			<div class="drawer-content bg-base-100 h-full">
-				<div class="navbar bg-base-100 sticky top-0 z-10 border shadow lg:hidden">
+				<div class="navbar bg-base-100 sticky top-0 z-10 shadow lg:hidden">
 					<div class="flex-none">
 						<label for="sidebar-toggle" class="btn drawer-button btn-square btn-ghost">
 							<MdiMenu width="1.8em" height="1.8em" />
@@ -41,11 +42,7 @@
 					</div>
 				</div>
 				<div class="main-content flex h-full flex-col">
-					<div role="alert" class="alert alert-success">
-						<div>
-							爬虫已经恢复！您可以在首页或者用户历史页面选择对某用户的犇犇进行抓取，但是由于爬虫的队列机制，请求需要排队。
-						</div>
-					</div>
+					<Announcement />
 					<main class="z-0 p-3">
 						<slot></slot>
 					</main>
@@ -65,7 +62,7 @@
 <style scoped>
 	@media (min-width: 1024px) {
 		.main-content {
-			padding-left: calc(56px + 16px);
+			padding-left: calc(4em);
 		}
 	}
 </style>

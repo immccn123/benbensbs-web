@@ -79,11 +79,7 @@
 					<div class="label">
 						<span class="label-text">子串</span>
 					</div>
-					<input
-						type="text"
-						bind:value={keyword}
-						class="input input-bordered w-full"
-					/>
+					<input type="text" bind:value={keyword} class="input input-bordered w-full" />
 				</div>
 
 				<div>
@@ -152,23 +148,27 @@
 						<Ad join flow />
 					{/if}
 				{/each}
+				{#if $query.hasNextPage}
+					<button
+						class="btn join-item my-2 w-full"
+						on:click={loadMore}
+						disabled={isFetching}
+					>
+						{#if isFetching}
+							<span class="loading loading-ring"></span>
+							少女祈祷中……
+						{:else}
+							<MdiMoreHoriz /> 加载更多
+						{/if}
+					</button>
+				{:else}
+					<div class="alert join-item my-2 w-full">
+						<MdiCommentAlert /> 似乎没有更多信息了 {'w(ﾟДﾟ)w'}
+					</div>
+				{/if}
 			</div>
 		{/if}
 	</div>
-	{#if !isLoading}
-		{#if $query.hasNextPage}
-			<button class="btn my-2 w-full" on:click={loadMore} disabled={isFetching}>
-				{#if isFetching}
-					<span class="loading loading-ring"></span>
-					少女祈祷中……
-				{:else}
-					<MdiMoreHoriz /> 加载更多
-				{/if}
-			</button>
-		{:else}
-			<div class="alert my-2 w-full">
-				<MdiCommentAlert /> 似乎没有更多信息了 {'w(ﾟДﾟ)w'}
-			</div>
-		{/if}
-	{/if}
+
+	{#if !isLoading}{/if}
 </div>

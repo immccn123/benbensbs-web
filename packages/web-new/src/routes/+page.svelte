@@ -83,7 +83,7 @@
 	<div class="row-auto grid grid-flow-row items-stretch gap-2 lg:grid-cols-4">
 		<div class="h-full lg:col-span-2">
 			{#if $randomBenben.isLoading}
-				<div class="card card-compact border">
+				<div class="card card-sm border">
 					<div class="card-body">
 						<div class="flex">
 							<div class="avatar mr-3 flex-none">

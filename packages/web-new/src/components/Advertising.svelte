@@ -3,13 +3,15 @@
 	import { fade } from 'svelte/transition';
 	import chance from 'chance';
 
-	const trending = [];
-
-	const items: {
+	type Ad = {
 		src: string;
 		alt: string;
 		href: string;
-	}[] = Array.prototype.concat(
+	};
+
+	const trending: Ad[] = [];
+
+	const items: Ad[] = Array.prototype.concat(
 		trending,
 		chance(new Date().toDateString()).shuffle([
 			{
@@ -55,7 +57,6 @@
 	function resetInterval() {
 		if (interval) clearInterval(interval);
 		interval = setInterval(switcher, 5000);
-		console.log(activeItem);
 	}
 
 	onMount(() => {

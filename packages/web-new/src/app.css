@@ -1,3 +1,12 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import 'tailwindcss';
+@plugin "daisyui" {
+	themes:
+		emerald --default,
+		dim --prefersdark;
+}
+@plugin "@tailwindcss/typography" {
+}
+
+.prose pre {
+	overflow: scroll auto;
+}
