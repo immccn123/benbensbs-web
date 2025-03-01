@@ -1,3 +1,5 @@
+<!-- svelte-ignore event_directive_deprecated -->
+
 <script lang="ts">
 	import { createFetcher } from '$lib';
 	import { createInfiniteQuery } from '@tanstack/svelte-query';
@@ -41,20 +43,19 @@
 		return queryParams.join('&');
 	};
 
-	const query = $derived(
-		createInfiniteQuery<API.Benben[]>({
-			queryKey: ['searchResults', keyword, dateBefore, senderText, dateAfter],
-			queryFn: async ({ pageParam }) =>
-				createFetcher<API.Benben[]>(`/search/db?${params(false, pageParam as boolean)}`)(),
-			getNextPageParam: (lastPage) => (lastPage.length === 50 ? true : undefined),
-			initialPageParam: false,
-			refetchInterval: 0,
-			refetchOnMount: false,
-			refetchIntervalInBackground: false,
-			refetchOnWindowFocus: false,
-			refetchOnReconnect: false
-		})
-	);
+	const query = createInfiniteQuery<API.Benben[]>({
+		// svelte-ignore state_referenced_locally 这里就是要让它在 reload 的时候再去刷新状态
+		queryKey: ['searchResults', keyword, dateBefore, senderText, dateAfter],
+		queryFn: async ({ pageParam }) =>
+			createFetcher<API.Benben[]>(`/search/db?${params(false, pageParam as boolean)}`)(),
+		getNextPageParam: (lastPage) => (lastPage.length === 50 ? true : undefined),
+		initialPageParam: false,
+		refetchInterval: 0,
+		refetchOnMount: false,
+		refetchIntervalInBackground: false,
+		refetchOnWindowFocus: false,
+		refetchOnReconnect: false
+	});
 
 	let queryData = $derived($query.data?.pages.flat());
 	let isFetching = $derived($query.isFetching);
@@ -175,3 +176,9 @@
 		{/if}
 	</div>
 </div>
+
+<style scoped>
+	:global(.sdt-component-wrap) {
+		width: 100%;
+	}
+</style>
