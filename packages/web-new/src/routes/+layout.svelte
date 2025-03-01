@@ -51,9 +51,9 @@
 				</div>
 			</div>
 			<div class="drawer-side z-20">
-				<label for="sidebar-toggle" aria-label="close sidebar" class="drawer-overlay" />
-
-				<Menu />
+				<label for="sidebar-toggle" aria-label="close sidebar" class="drawer-overlay">
+					<Menu />
+				</label>
 			</div>
 		</div>
 	</QueryClientProvider>
