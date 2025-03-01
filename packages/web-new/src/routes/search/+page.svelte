@@ -169,6 +169,4 @@
 			</div>
 		{/if}
 	</div>
-
-	{#if !isLoading}{/if}
 </div>
