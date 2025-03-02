@@ -2,7 +2,7 @@
 	import Notification from './Notification.svelte';
 	import notifications from '$lib/state/notifications';
 
-	import { fly } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
 </script>
 
@@ -13,8 +13,8 @@
 		{#each Object.entries($notifications).sort((a, b) => +a[0] - +b[0]) as [key, { role, msg }] (key)}
 			<div
 				animate:flip={{ duration: 300 }}
-				in:fly={{ x: 100, duration: 300, delay: 0 }}
-				out:fly={{ y: -100, duration: 300, delay: 0 }}
+				in:fly={{ x: 100, duration: 300 }}
+				out:fade={{ duration: 300 }}
 				class="z-10"
 			>
 				{#key key}

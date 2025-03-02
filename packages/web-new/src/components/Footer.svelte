@@ -13,7 +13,6 @@
 	<aside>
 		<p>
 			犇站 ✨ Zephyr Version<br />
-			<!-- svelte-ignore missing-declaration (declared in vite.config.ts & app.d.ts) -->
 			<code>{__VERSION__} ({__LASTMOD__})</code>
 			<br />
 			Copyright &copy;

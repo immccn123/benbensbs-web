@@ -20,14 +20,20 @@
 	let dateAfter: string = $state(data.dateAfter ?? '');
 	let results: API.Benben[] = $state([]);
 
-	if (data.keyword) setTitle(`检索 ${data.keyword} 的结果`);
-	else setTitle(`检索`);
+	$effect(() => {
+		if (data.keyword) setTitle(`检索 ${data.keyword} 的结果`);
+		else setTitle(`检索`);
+	});
+
+	$effect(() => {
+		results = queryData ?? [];
+	});
 
 	const params = (search: boolean = false, loadMore = false) => {
 		const queryParams = [];
 		if (keyword) queryParams.push(`keyword=${encodeURIComponent(keyword)}`);
 		if (senderText) {
-			const senders = senderText.split(',').map((x) => parseInt(x.trim()));
+			const senders = senderText.split(',').map((x) => +x.trim());
 			senders.forEach((value) => queryParams.push(`senders=${value}`));
 		}
 		if (dateBefore)
@@ -44,8 +50,7 @@
 	};
 
 	const query = createInfiniteQuery<API.Benben[]>({
-		// svelte-ignore state_referenced_locally 这里就是要让它在 reload 的时候再去刷新状态
-		queryKey: ['searchResults', keyword, dateBefore, senderText, dateAfter],
+		queryKey: ['searchResults', data.keyword, data.dateBefore, data.senderText, data.dateAfter],
 		queryFn: async ({ pageParam }) =>
 			createFetcher<API.Benben[]>(`/search/db?${params(false, pageParam as boolean)}`)(),
 		getNextPageParam: (lastPage) => (lastPage.length === 50 ? true : undefined),
@@ -60,9 +65,6 @@
 	let queryData = $derived($query.data?.pages.flat());
 	let isFetching = $derived($query.isFetching);
 	let isLoading = $derived($query.isLoading || $query.isRefetching);
-	$effect(() => {
-		results = queryData ?? [];
-	});
 
 	const loadMore = async () => {
 		$query.fetchNextPage();
@@ -146,7 +148,7 @@
 				<br />
 				少女祈祷中
 			</div>
-		{:else if results.length !== 0}
+		{:else}
 			<div class="join join-vertical w-full">
 				{#each results as result, i (result.id)}
 					<Benben join {...result} />
@@ -168,7 +170,7 @@
 						{/if}
 					</button>
 				{:else}
-					<div class="alert join-item my-2 w-full">
+					<div class={['alert my-2 w-full', results.length !== 0 && 'join-item']}>
 						<MdiCommentAlert /> 似乎没有更多信息了 {'w(ﾟДﾟ)w'}
 					</div>
 				{/if}

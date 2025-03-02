@@ -8,7 +8,7 @@
 	$: $initialUid = data.id;
 	$: historyUsernames = createHistoryUsernameQuery(+data.id);
 	$: setTitle(
-		`${$historyUsernames.data?.join(' / ')?.concat(' 的') ?? ''}用户${data.analytics ? '分析' : '历史'}`
+		`${($historyUsernames.data?.length === 0 ? undefined : $historyUsernames.data)?.join(' / ')?.concat(' 的') ?? ''}用户${data.analytics ? '分析' : '历史'}`
 	);
 </script>
 

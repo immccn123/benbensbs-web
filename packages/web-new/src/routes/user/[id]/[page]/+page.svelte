@@ -16,7 +16,7 @@
 	const perPage = 50;
 
 	$: benbens = createQuery<API.UserBenbens>({
-		queryKey: [`/blackHistory/feed/${uid}?page=${page}&per_page=${perPage}`],
+		queryKey: ['/blackHistory/feed/', uid, page, perPage],
 		queryFn: createFetcher(`/blackHistory/feed/${uid}?page=${page}&per_page=${perPage}`),
 		refetchOnMount: true,
 		refetchOnReconnect: false,
@@ -67,7 +67,7 @@
 </div>
 
 <div class="sticky bottom-2 mt-2 flex items-end justify-center">
-	<div class="card card-sm bg-base-100 w-120 shadow card-border">
+	<div class="card card-sm bg-base-100 w-120 card-border shadow">
 		<div class="card-body">
 			<div class="join justify-center">
 				<a class="join-item btn {$isLoading && 'btn-disabled'}" href="/user/{uid}/1">

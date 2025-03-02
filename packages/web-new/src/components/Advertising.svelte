@@ -1,3 +1,5 @@
+<!-- svelte-ignore event_directive_deprecated -->
+
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
@@ -65,7 +67,7 @@
 </script>
 
 <div class="carousel w-full">
-	{#each items as item, index (item.src + index)}
+	{#each items as item, index (item.src)}
 		{#if index === activeItem}
 			<div
 				class="carousel-item sticky left-0 top-0 w-full"
@@ -79,6 +81,7 @@
 		{/if}
 	{/each}
 </div>
+
 <!-- 每 24h 随机打乱一次！ -->
 <div class="flex w-full justify-center gap-2 py-2">
 	{#each items as _, index}
