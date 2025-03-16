@@ -8,6 +8,8 @@
 	import MdiHistory from '~icons/mdi/history';
 	import MdiSearch from '~icons/mdi/search';
 	import MdiStars from '~icons/mdi/stars';
+
+	import MdiSettings from '~icons/mdi/settings';
 </script>
 
 <ul
@@ -45,6 +47,10 @@
 	<MenuLink>
 		<MdiStars width="24px" height="24px" slot="icon" />
 		犇站 Zephyr Ver.
+	</MenuLink>
+	<MenuLink to="/settings">
+		<MdiSettings width="24px" height="24px" slot="icon" />
+		设置
 	</MenuLink>
 </ul>
 

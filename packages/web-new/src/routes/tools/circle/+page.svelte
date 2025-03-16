@@ -71,7 +71,7 @@
 				{
 					selector: `node[id="${uid}"]`,
 					style: {
-						'background-image': `url(${`https://cdn.luogu.com.cn/upload/usericon/${uid}.png`})`,
+						'background-image': `url(https://cdn.luogu.com.cn/upload/usericon/${uid}.png?benben-circle)`,
 						height: 1600,
 						width: 1600,
 						'border-width': 50,
@@ -81,7 +81,7 @@
 				...response.result.map((x, i) => ({
 					selector: `node[id="${x.uid}"]`,
 					style: {
-						'background-image': `url(https://cdn.luogu.com.cn/upload/usericon/${x.uid}.png)`,
+						'background-image': `url(https://cdn.luogu.com.cn/upload/usericon/${x.uid}.png?benben-circle)`,
 						height: getPos(i).rr,
 						width: getPos(i).rr
 					}

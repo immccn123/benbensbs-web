@@ -22,11 +22,6 @@
 				href: 'https://qm.qq.com/q/f2Wp6MF5lu'
 			},
 			{
-				src: 'https://static.imken.moe/bensite-advertising/blikznxt-exp20241130.webp',
-				alt: 'Ad by 501947',
-				href: 'https://www.luogu.com.cn/user/727558'
-			},
-			{
 				src: 'https://static.imken.moe/bensite-advertising/7-365654-exp241231.png',
 				alt: 'Sleeping Cup - by 365654',
 				href: 'http://8.136.99.126'

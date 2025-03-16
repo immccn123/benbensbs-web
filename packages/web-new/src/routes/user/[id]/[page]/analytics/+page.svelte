@@ -22,15 +22,11 @@
 	<div class="mx-auto text-center">
 		<div>
 			<div class="avatar w-45 border-xl rounded-full">
-				{#await fetch(`https://cdn.luogu.com.cn/upload/usericon/${$initialUid}.png`)}
-					<span class="loading loading-ring loading-lg"></span>
-				{:then}
-					<img
-						alt="{$initialUid} 的头像"
-						class="not-prose"
-						src="https://cdn.luogu.com.cn/upload/usericon/{$initialUid}.png"
-					/>
-				{/await}
+				<img
+					alt="{$initialUid} 的头像"
+					class="not-prose"
+					src="https://cdn.luogu.com.cn/upload/usericon/{$initialUid}.png"
+				/>
 			</div>
 		</div>
 

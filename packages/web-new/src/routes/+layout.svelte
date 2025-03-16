@@ -7,23 +7,18 @@
 	import Footer from '../components/Footer.svelte';
 	import Menu from '../components/Menu.svelte';
 
-	import { ModeWatcher, systemPrefersMode } from 'mode-watcher';
 	import HeadTitle from '../components/HeadTitle.svelte';
 	import ShareDialog from '../components/ShareDialog.svelte';
 	import MarkdownDialog from '../components/MarkdownDialog.svelte';
 	import Announcement from '../components/Announcement.svelte';
-
-	systemPrefersMode.subscribe((value) => {
-		if (value === 'light') document.body.setAttribute('data-theme', 'lofi');
-		else if (value === 'dark') document.body.setAttribute('data-theme', 'black');
-	});
+	import SettingsProvider from '../components/SettingsProvider.svelte';
 </script>
 
-<ModeWatcher />
 <NotificationStack />
 <HeadTitle />
 <ShareDialog />
 <MarkdownDialog />
+<SettingsProvider />
 
 <div class="h-screen">
 	<QueryClientProvider>

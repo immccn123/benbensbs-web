@@ -5,6 +5,8 @@
 	import MdiCodeTags from '~icons/mdi/code-tags';
 
 	import MarkdownIt from 'markdown-it';
+	import { settings } from '../store/settings';
+	import bilibiliPlugin from '$lib/markdown/bilibili';
 
 	import { copyText } from '$lib';
 	import { addNotification } from '$lib/state/notifications';
@@ -18,13 +20,19 @@
 	export let fit = false;
 
 	let contentElement: HTMLDivElement;
-	// let origin = 'https://benben.sbs';
 
 	onMount(() => {
 		origin = location.origin;
 	});
 
 	let benben: HTMLDivElement;
+
+	let markdownRenderer = new MarkdownIt();
+	// if (settings.markdownOptions.bilibili) markdownRenderer.use(bilibiliPlugin);
+
+	$: if (!('initializing' in $settings) && $settings.markdownOptions.bilibili) {
+		markdownRenderer = new MarkdownIt().use(bilibiliPlugin);
+	}
 </script>
 
 <div
@@ -35,15 +43,11 @@
 		<div class="flex">
 			<div class="avatar mr-3 flex-none">
 				<div class="h-10 w-10 rounded-full">
-					{#await fetch(`https://cdn.luogu.com.cn/upload/usericon/${userId}.png`)}
-						<span class="loading loading-ring loading-lg"></span>
-					{:then}
-						<img
-							alt="{username} 的头像"
-							class="not-prose"
-							src="https://cdn.luogu.com.cn/upload/usericon/{userId}.png"
-						/>
-					{/await}
+					<img
+						alt="{username} 的头像"
+						class="not-prose"
+						src="https://cdn.luogu.com.cn/upload/usericon/{userId}.png"
+					/>
 				</div>
 			</div>
 			<div class="flex-1 leading-5">
@@ -58,7 +62,7 @@
 		</div>
 
 		<div class="prose max-w-full text-sm" bind:this={contentElement}>
-			{@html new MarkdownIt().render(content)}
+			{@html markdownRenderer.render(content)}
 		</div>
 
 		<div class="card-actions text-xs">
