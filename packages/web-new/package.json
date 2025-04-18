@@ -16,7 +16,7 @@
     "@iconify-json/mdi": "^1.2.3",
     "@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia@^1.2.0",
     "@sveltejs/adapter-static": "^3.0.8",
-    "@sveltejs/kit": "^2.17.3",
+    "@sveltejs/kit": "^2.20.6",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "@tailwindcss/postcss": "^4.0.9",
     "@tailwindcss/typography": "^0.5.16",
