@@ -9,8 +9,9 @@
 	export let responsive: boolean = false;
 
 	onMount(() => {
-		// @ts-ignore
-		(window.adsbygoogle = window.adsbygoogle || []).push({});
+		!page.error &&
+			// @ts-ignore
+			(window.adsbygoogle = window.adsbygoogle || []).push({});
 	});
 </script>
 
