@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { initialUid, isLoading } from './store';
-	import { addNotification } from '$lib/state/notifications';
+	import { addSpiderTask } from '$lib/query/spider';
 
 	$: uid = $initialUid ?? '';
 
@@ -36,10 +36,7 @@
 				class="btn join-item"
 				on:click={() => {
 					isFetching = true;
-					fetch(`https://spider.benben.sbs/${uid}`)
-						.then(() => addNotification('success', '成功'))
-						.catch(() => addNotification('error', '出了些问题。请稍候再试。'))
-						.finally(() => (isFetching = false));
+					addSpiderTask(uid).finally(() => (isFetching = false));
 				}}
 				disabled={isFetching || $isLoading || uid === '' || uid === null}
 			>

@@ -1,4 +1,6 @@
-export const load = ({ url: requestUrl }) => {
+import type { PageLoad } from "./$types";
+
+export const load: PageLoad = ({ url: requestUrl }) => {
 	const url = new URL(requestUrl);
 	const urlParams = url.searchParams;
 

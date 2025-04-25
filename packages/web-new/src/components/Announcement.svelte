@@ -12,6 +12,10 @@
 		{
 			type: 'normal',
 			contentHtml: '欢迎加入我们的用户讨论群！QQ 群号：313404608'
+		},
+		{
+			type: 'warning',
+			contentHtml: '在设置页面中设置关注列表后，可以设置关注列表批量抓取已关注用户（伪全网犇）。'
 		}
 	];
 

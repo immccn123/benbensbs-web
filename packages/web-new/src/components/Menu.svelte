@@ -8,6 +8,7 @@
 	import MdiHistory from '~icons/mdi/history';
 	import MdiSearch from '~icons/mdi/search';
 	import MdiStars from '~icons/mdi/stars';
+	import MdiEarth from '~icons/mdi/earth';
 
 	import MdiSettings from '~icons/mdi/settings';
 </script>
@@ -42,6 +43,10 @@
 	<MenuLink to="/search">
 		<MdiSearch width="24px" height="24px" slot="icon" />
 		高级检索
+	</MenuLink>
+	<MenuLink to="/fake_realtime">
+		<MdiEarth width="24px" height="24px" slot="icon" />
+		伪全网犇
 	</MenuLink>
 	<li class="invisible flex-grow"></li>
 	<MenuLink>

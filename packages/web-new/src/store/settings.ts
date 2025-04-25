@@ -17,9 +17,7 @@ const getInitialSettings = () => {
 			return local;
 		}
 	} else {
-		return {
-			initializing: true
-		};
+		return null;
 	}
 
 	return {

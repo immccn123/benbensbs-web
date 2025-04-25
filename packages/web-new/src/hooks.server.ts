@@ -19,8 +19,8 @@ const minification_options = {
 	sortAttributes: true,
 	sortClassName: true
 };
-/** @type {import('@sveltejs/kit').Handle} */
-export async function handle({ event, resolve }) {
+
+export const handle: import('@sveltejs/kit').Handle = async function ({ event, resolve }) {
 	let page = '';
 	return resolve(event, {
 		transformPageChunk: ({ html, done }) => {
@@ -30,4 +30,4 @@ export async function handle({ event, resolve }) {
 			}
 		}
 	});
-}
+};

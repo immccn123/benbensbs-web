@@ -30,7 +30,7 @@
 	let markdownRenderer = new MarkdownIt();
 	// if (settings.markdownOptions.bilibili) markdownRenderer.use(bilibiliPlugin);
 
-	$: if (!('initializing' in $settings) && $settings.markdownOptions.bilibili) {
+	$: if ($settings && $settings.markdownOptions.bilibili) {
 		markdownRenderer = new MarkdownIt().use(bilibiliPlugin);
 	}
 </script>

@@ -3,12 +3,11 @@
 	import Benben from '../components/Benben.svelte';
 	import MdiRefresh from '~icons/mdi/refresh';
 	import { createFetcher } from '$lib';
-	import { addNotification } from '$lib/state/notifications';
-	import { PUBLIC_API_BASE } from '$env/static/public';
 	import MdiCubeScan from '~icons/mdi/cube-scan';
 	import MdiHours24 from '~icons/mdi/hours-24';
 	import { setTitle } from '$lib/state/title';
 	import Advertising from '../components/Advertising.svelte';
+	import { addSpiderTask } from '$lib/query/spider';
 
 	const stat = createQuery<API.Stat>({
 		queryKey: ['/statistics'],
@@ -112,10 +111,7 @@
 					class="btn join-item"
 					on:click={() => {
 						isFetching = true;
-						fetch(`https://spider.benben.sbs/${uid}`)
-							.then(() => addNotification('success', '成功'))
-							.catch(() => addNotification('error', '出了些问题。请稍候再试。'))
-							.finally(() => (isFetching = false));
+						addSpiderTask(uid).finally(() => (isFetching = false));
 					}}
 					disabled={isFetching}
 				>
