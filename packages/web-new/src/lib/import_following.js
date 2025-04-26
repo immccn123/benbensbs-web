@@ -7,6 +7,7 @@
 	if (typeof (uid ?? undefined) === 'undefined') {
 		alert('请确认正在个人中心执行本段代码。');
 	} else {
+		console.log('正在获取关注列表，请耐心等待。');
 		const followings = [];
 		let page = 1;
 		outer: while (true) {
