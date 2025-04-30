@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { settings, revalidateSettings } from '../store/settings';
+	import { settings, revalidateSettings } from '$lib/store/settings';
 
 	onMount(() => {
 		const listener = () => revalidateSettings();

@@ -3,8 +3,8 @@
 	import { addNotification } from '$lib/state/notifications';
 	import cytoscape from 'cytoscape';
 	import { writable } from 'svelte/store';
-	import Ad from '../../../components/Ad.svelte';
-	import Loader from '../../../components/Loader.svelte';
+	import Ad from '$lib/components/Ad.svelte';
+	import Loader from '$lib/components/Loader.svelte';
 	import { setTitle } from '$lib/state/title';
 
 	const isLoading = writable(false);

@@ -3,8 +3,8 @@
 	import { createQuery } from '@tanstack/svelte-query';
 	import { initialUsername, isLoading } from '../store.js';
 	import MdiCommentAlert from '~icons/mdi/comment-alert';
-	import Benben from '../../../../components/Benben.svelte';
-	import Loader from '../../../../components/Loader.svelte';
+	import Benben from '$lib/components/Benben.svelte';
+	import Loader from '$lib/components/Loader.svelte';
 
 	export let data;
 

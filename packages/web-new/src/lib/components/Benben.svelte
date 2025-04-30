@@ -5,7 +5,7 @@
 	import MdiCodeTags from '~icons/mdi/code-tags';
 
 	import MarkdownIt from 'markdown-it';
-	import { settings } from '../store/settings';
+	import { settings } from '$lib/store/settings';
 	import bilibiliPlugin from '$lib/markdown/bilibili';
 
 	import { copyText } from '$lib';

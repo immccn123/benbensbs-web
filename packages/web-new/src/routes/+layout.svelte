@@ -2,18 +2,28 @@
 	import '../app.css';
 
 	import MdiMenu from '~icons/mdi/menu';
-	import NotificationStack from '../components/NotificationStack.svelte';
+	import NotificationStack from '$lib/components/NotificationStack.svelte';
 	import { QueryClientProvider } from '@tanstack/svelte-query';
-	import Footer from '../components/Footer.svelte';
-	import Menu from '../components/Menu.svelte';
+	import Footer from '$lib/components/Footer.svelte';
+	import Menu from '$lib/components/Menu.svelte';
 
-	import HeadTitle from '../components/HeadTitle.svelte';
-	import ShareDialog from '../components/ShareDialog.svelte';
-	import MarkdownDialog from '../components/MarkdownDialog.svelte';
-	import Announcement from '../components/Announcement.svelte';
-	import SettingsProvider from '../components/SettingsProvider.svelte';
+	import HeadTitle from '$lib/components/HeadTitle.svelte';
+	import ShareDialog from '$lib/components/ShareDialog.svelte';
+	import MarkdownDialog from '$lib/components/MarkdownDialog.svelte';
+	import Announcement from '$lib/components/Announcement.svelte';
+	import SettingsProvider from '$lib/components/SettingsProvider.svelte';
+
+	import { pwaInfo } from 'virtual:pwa-info';
+	import { ModeWatcher } from 'mode-watcher';
+
+	$: webManifestLink = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 </script>
 
+<svelte:head>
+	{@html webManifestLink}
+</svelte:head>
+
+<ModeWatcher />
 <NotificationStack />
 <HeadTitle />
 <ShareDialog />
@@ -53,6 +63,10 @@
 		</div>
 	</QueryClientProvider>
 </div>
+
+{#await import('$lib/components/ReloadPrompt.svelte') then { default: ReloadPrompt }}
+	<ReloadPrompt />
+{/await}
 
 <style scoped>
 	@media (min-width: 1024px) {

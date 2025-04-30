@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { createQuery } from '@tanstack/svelte-query';
-	import Benben from '../components/Benben.svelte';
+	import Benben from '$lib/components/Benben.svelte';
 	import MdiRefresh from '~icons/mdi/refresh';
 	import { createFetcher } from '$lib';
 	import MdiCubeScan from '~icons/mdi/cube-scan';
 	import MdiHours24 from '~icons/mdi/hours-24';
 	import { setTitle } from '$lib/state/title';
-	import Advertising from '../components/Advertising.svelte';
+	import Advertising from '$lib/components/Advertising.svelte';
 	import { addSpiderTask } from '$lib/query/spider';
 
 	const stat = createQuery<API.Stat>({

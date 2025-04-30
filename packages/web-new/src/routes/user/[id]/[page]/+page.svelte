@@ -3,10 +3,10 @@
 	import { createQuery } from '@tanstack/svelte-query';
 	import { isLoading } from '../../store.js';
 	import MdiCommentAlert from '~icons/mdi/comment-alert';
-	import Benben from '../../../../components/Benben.svelte';
+	import Benben from '$lib/components/Benben.svelte';
 	import MdiPageFirst from '~icons/mdi/page-first';
 	import MdiPageLast from '~icons/mdi/page-last';
-	import Ad from '../../../../components/Ad.svelte';
+	import Ad from '$lib/components/Ad.svelte';
 
 	export let data;
 

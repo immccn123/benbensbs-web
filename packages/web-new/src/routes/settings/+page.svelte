@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { settings } from '../../store/settings';
+	import { settings } from '$lib/store/settings';
 
 	export let data;
 

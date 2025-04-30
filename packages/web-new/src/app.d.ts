@@ -1,4 +1,7 @@
 import 'unplugin-icons/types/svelte';
+import 'vite-plugin-pwa/svelte';
+import 'vite-plugin-pwa/client';
+import 'vite-plugin-pwa/info';
 
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces

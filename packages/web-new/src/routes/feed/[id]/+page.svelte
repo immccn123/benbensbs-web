@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { setTitle } from '$lib/state/title';
-	import Benben from '../../../components/Benben.svelte';
-	import Takedown from '../../../components/Takedown.svelte';
+	import Benben from '$lib/components/Benben.svelte';
+	import Takedown from '$lib/components/Takedown.svelte';
 
 	export let data;
 

@@ -4,7 +4,7 @@
 	import { initialUid } from '../../../store.js';
 	import { createQuery } from '@tanstack/svelte-query';
 	import { createFetcher } from '$lib';
-	import Heatmap from '../../../../../components/Heatmap.svelte';
+	import Heatmap from '$lib/components/Heatmap.svelte';
 
 	export let data;
 

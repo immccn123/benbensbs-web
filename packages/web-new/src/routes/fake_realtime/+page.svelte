@@ -2,10 +2,10 @@
 	import { createQuery } from '@tanstack/svelte-query';
 	import MdiCommentAlert from '~icons/mdi/comment-alert';
 	import MdiRefresh from '~icons/mdi/refresh';
-	import { settings } from '../../store/settings';
+	import { settings } from '$lib/store/settings';
 	import { createFetcher } from '$lib';
-	import Benben from '../../components/Benben.svelte';
-	import Ad from '../../components/Ad.svelte';
+	import Benben from '$lib/components/Benben.svelte';
+	import Ad from '$lib/components/Ad.svelte';
 	import { addSpiderTasks } from '$lib/query/spider';
 
 	$: followingUsers = $settings?.followedUsers ?? [];

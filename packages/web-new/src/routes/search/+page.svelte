@@ -4,12 +4,12 @@
 	import { createFetcher } from '$lib';
 	import { createInfiniteQuery } from '@tanstack/svelte-query';
 	import SveltyPicker from 'svelty-picker';
-	import Benben from '../../components/Benben.svelte';
+	import Benben from '$lib/components/Benben.svelte';
 	import { goto } from '$app/navigation';
 	import MdiCommentAlert from '~icons/mdi/comment-alert';
 	import MdiSearch from '~icons/mdi/search';
 	import MdiMoreHoriz from '~icons/mdi/more-horiz';
-	import Ad from '../../components/Ad.svelte';
+	import Ad from '$lib/components/Ad.svelte';
 	import { setTitle } from '$lib/state/title';
 
 	let { data } = $props();

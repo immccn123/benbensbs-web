@@ -4,6 +4,7 @@ import Icons from 'unplugin-icons/vite';
 
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 
 import UnpluginTypia from '@ryoppippi/unplugin-typia/vite';
 
@@ -17,7 +18,30 @@ const [version, lastmod] = (
 ).map((x) => (x.status === 'fulfilled' ? x.value?.stdout.trim() : undefined));
 
 export default defineConfig({
-	plugins: [sveltekit(), Icons({ compiler: 'svelte' }), UnpluginTypia()],
+	plugins: [
+		sveltekit(),
+		Icons({ compiler: 'svelte' }),
+		UnpluginTypia(),
+		SvelteKitPWA({
+			registerType: 'prompt',
+			scope: '/',
+			base: '/',
+			manifest: {
+				name: '犇站',
+				short_name: '犇站',
+				start_url: '/',
+				display: 'standalone',
+				lang: 'zh-cn',
+				scope: '/'
+			},
+			injectManifest: {
+				globPatterns: [
+					'client/**/*.{js,css,ico,png,svg,webp,webmanifest,ttf,woff,woff2}',
+					'prerendered/**/*.{html,json}'
+				]
+			}
+		})
+	],
 	define: {
 		__VERSION__: `"${version}"`,
 		__LASTMOD__: `"${lastmod}"`
