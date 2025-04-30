@@ -1,45 +1,34 @@
 <script lang="ts">
-	import { useRegisterSW } from 'virtual:pwa-register/svelte'
-	const {
-		needRefresh,
-		updateServiceWorker,
-		offlineReady
-	} = useRegisterSW({
+	import { useRegisterSW } from 'virtual:pwa-register/svelte';
+
+	const { needRefresh, updateServiceWorker, offlineReady } = useRegisterSW({
 		onRegistered(r) {
-			console.log(`SW Registered: ${r}`)
+			console.log(`SW Registered: ${r}`);
 		},
 		onRegisterError(error) {
-			console.log('SW registration error', error)
-		},
-	})
+			console.log('SW registration error', error);
+		}
+	});
 	const close = () => {
-		offlineReady.set(false)
-		needRefresh.set(false)
-	}
-	$: toast = $offlineReady || $needRefresh
+		offlineReady.set(false);
+		needRefresh.set(false);
+	};
+	$: toast = $offlineReady || $needRefresh;
 </script>
 
 {#if toast}
 	<div class="pwa-toast" role="alert">
 		<div class="message">
 			{#if $offlineReady}
-				<span>
-					应用已经缓存至本地。
-				</span>
+				<span> 应用已经缓存至本地。 </span>
 			{:else}
-				<span>
-					新版本可用，点击更新按钮更新（可忽略）。
-				</span>
+				<span> 新版本可用，点击更新按钮更新（可忽略）。 </span>
 			{/if}
 		</div>
 		{#if $needRefresh}
-			<button on:click={() => updateServiceWorker(true)}>
-				更新
-			</button>
+			<button on:click={() => updateServiceWorker(true)}> 更新 </button>
 		{/if}
-		<button on:click={close}>
-			关闭
-		</button>
+		<button on:click={close}> 关闭 </button>
 	</div>
 {/if}
 

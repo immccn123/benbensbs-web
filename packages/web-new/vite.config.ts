@@ -29,10 +29,14 @@ export default defineConfig({
 			manifest: {
 				name: '犇站',
 				short_name: '犇站',
-				start_url: '/',
+				start_url: 'https://benben.sbs',
 				display: 'standalone',
 				lang: 'zh-cn',
-				scope: '/'
+				scope: '/',
+				icons: [
+					{ src: '/icon-192x192.png', sizes: '192x192' },
+					{ src: '/icon-512x512.jpg', sizes: '512x512' }
+				]
 			},
 			injectManifest: {
 				globPatterns: [
