@@ -3,18 +3,20 @@
   "version": "1.0.0",
   "description": "Helper server for developement",
   "type": "module",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "start-proxy": "node index.js"
+    "start": "tsx index.ts",
+    "watch": "tsx --watch index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "packageManager": "pnpm@10.10.0",
   "dependencies": {
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
-    "http-proxy-middleware": "^3.0.5",
-    "socks-proxy-agent": "^8.0.5"
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.4",
+    "typescript": "^5.7.3"
   }
 }
