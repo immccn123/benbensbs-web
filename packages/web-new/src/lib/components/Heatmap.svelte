@@ -11,31 +11,34 @@
 	const width = 53 * cellSize;
 	const height = 7 * cellSize;
 
-	$: colorScale = ($systemPrefersMode === 'light'
-		? ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39']
-		: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'])
+	$: colorScale =
+		$systemPrefersMode === 'light'
+			? ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39']
+			: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'];
 
-	onMount(() => {
-		systemPrefersMode.subscribe(() => {
-			container.innerHTML = '';
-			drawHeatmap();
-		});
-	});
+	$: drawHeatmap(container, colorScale, data);
 
-	const getColor = (count: number) => {
-		return colorScale[countMap(count)]
-	}
-
-	const countMap = (count: number) => {
-		if (count >= 50) return 4;
-		if (count >= 20) return 3;
-		if (count >= 5) return 2;
-		if (count >= 1) return 1;
-		return 0;
-	};
-
-	function drawHeatmap() {
+	function drawHeatmap(
+		container: HTMLDivElement | undefined,
+		colorScale: string[],
+		data: API.Heatmap
+	) {
+		if (!container) return;
 		if (!data.length) return;
+
+		container.innerHTML = '';
+
+		const countMap = (count: number) => {
+			if (count >= 50) return 4;
+			if (count >= 20) return 3;
+			if (count >= 5) return 2;
+			if (count >= 1) return 1;
+			return 0;
+		};
+
+		const getColor = (count: number) => {
+			return colorScale[countMap(count)];
+		};
 
 		const parseDate = d3.timeParse('%Y-%m-%d');
 		const dates = data.map((d) => parseDate(d.date)!);
@@ -77,13 +80,13 @@
 			.attr('width', cellSize - 1)
 			.attr('height', cellSize - 1)
 			.attr('fill', (d) => getColor(d.count))
-			.style('stroke', $systemPrefersMode === "light" ? 'white' : "black")
+			.style('stroke', $systemPrefersMode === 'light' ? 'white' : 'black')
 			.on('mouseover', function (_, d) {
 				tooltip.style('visibility', 'visible').html(`Date: ${d.date}<br>Count: ${d.count}`);
 				// d3.select(this).style('stroke', 'black').style('opacity', 1);
 			})
 			.on('mousemove', (e) => {
-				tooltip.style('top', `${e.pageY + 5}px`).style('left', `${e.pageX + 5}px`);
+				tooltip.style('top', `${e.clientY + 5}px`).style('left', `${e.clientX + 5}px`);
 			})
 			.on('mouseout', function () {
 				tooltip.style('visibility', 'hidden');

@@ -121,7 +121,7 @@ app.get("/tools/heatmap/:id", (_req, res, _next) => {
   const now = +new Date();
   for (let i = 365; i--;) {
     heatmap.push({
-      count: faker.number.int(10),
+      count: faker.number.int(100),
       date: (new Date(now - i * 86400_000)).toISOString().slice(0, 10),
     });
   }
