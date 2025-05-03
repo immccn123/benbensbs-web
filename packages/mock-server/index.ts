@@ -144,6 +144,10 @@ app.get("/tools/getFeed/:id", (req, res, _next) => {
   res.json({ ...randomBenben(), id: parseInt(req.params.id) });
 });
 
+app.get("/:id", (_req, res, _next) => {
+  res.send("Ok");
+});
+
 app.use((req, res, _next) => {
   console.warn(`[404] ${req.method} ${req.originalUrl}`);
   res.status(404).send("not implemented");
