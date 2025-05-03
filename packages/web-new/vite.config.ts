@@ -38,11 +38,9 @@ export default defineConfig({
 					{ src: '/icon-512x512.jpg', sizes: '512x512' }
 				]
 			},
-			injectManifest: {
-				globPatterns: [
-					'client/**/*.{js,css,ico,png,svg,webp,webmanifest,ttf,woff,woff2}',
-					'prerendered/**/*.{html,json}'
-				]
+			workbox: {
+				navigateFallback: '/index.html',
+				// navigateFallbackDenylist: [/^\/user\//]
 			}
 		})
 	],
