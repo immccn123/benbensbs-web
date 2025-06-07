@@ -32,16 +32,18 @@
 			>
 				{#if $benbens.isRefetching}
 					<span class="loading loading-ring loading-xs"></span>
-				{:else if $benbens.isSuccess}
-					<MdiRefresh /> 刷新
+				{:else}
+					<MdiRefresh />
 				{/if}
+				刷新
 			</button>
 			<button
-				class="btn btn-sm join-item"
+				class="btn btn-sm join-item tooltip"
+				data-tip="前往设置可设置关注列表"
 				disabled={$benbens.isFetching}
 				on:click={() => addSpiderTasks(followingUsers)}
 			>
-				请求抓取关注
+				请求抓取已关注用户
 			</button>
 		</div>
 	</h2>

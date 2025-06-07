@@ -19,6 +19,7 @@
 			class="overflow-hidden text-nowrap"
 			href={to}
 			class:menu-active={fullMatch ? pathname === to : pathname.startsWith(to)}
+			target={to.startsWith('/') ? undefined : '_blank'}
 		>
 			{#if $$slots.icon}
 				<slot name="icon"></slot>

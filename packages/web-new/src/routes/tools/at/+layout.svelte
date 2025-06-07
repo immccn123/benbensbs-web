@@ -14,6 +14,10 @@
 <div class="container mx-auto">
 	<h2 class="mb-3 text-2xl">被 at 查询</h2>
 
+	<p class="mb-3">
+		注意这里要填写<span class="rainbow-text font-bold">「用户名」</span>！
+	</p>
+
 	<form on:submit|preventDefault={() => goto(`/tools/at/${encodeURIComponent(username)}`)}>
 		<div class="join">
 			<input

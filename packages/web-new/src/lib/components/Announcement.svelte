@@ -15,16 +15,17 @@
 		},
 		{
 			type: 'normal',
-			contentHtml: '某算法竞赛社区用户动态发送累计数量动态演示 <a class="link" href="https://www.bilibili.com/video/BV1PL76zjEtE/">https://www.bilibili.com/video/BV1PL76zjEtE/</a>'
+			contentHtml:
+				'某算法竞赛社区用户动态发送累计数量动态演示 <a class="link" href="https://www.bilibili.com/video/BV1PL76zjEtE/">https://www.bilibili.com/video/BV1PL76zjEtE/</a>'
 		},
 		{
-			type: 'warning',
-			contentHtml: '在设置页面中设置关注列表后，可以设置关注列表批量抓取已关注用户（伪全网犇）。'
+			type: 'normal',
+			contentHtml: '<a class="link" target="_blank" href="https://hub.benben.sbs/ccb">洛谷笑传之猜猜犇</a>'
 		},
 		{
 			type: 'warning',
 			contentHtml: '<a class="link" href="https://sponsor.imken.moe">捐赠</a>帮助我们活下去！'
-		},
+		}
 	];
 
 	let activeItemId = 0;

@@ -2,14 +2,14 @@
 	import MenuLink from './MenuLink.svelte';
 
 	import MdiClose from '~icons/mdi/close';
-	import MdiHome from '~icons/mdi/home';
+	import MdiHomeOutline from '~icons/mdi/home-outline';
 	import MaterialAlternateEmail from '~icons/mdi/alternate-email';
 	import MdiDotsCircle from '~icons/mdi/dots-circle';
 	import MdiHistory from '~icons/mdi/history';
 	import MdiSearch from '~icons/mdi/search';
 	import MdiStars from '~icons/mdi/stars';
 	import MdiEarth from '~icons/mdi/earth';
-
+	import MdiHubOutline from '~icons/mdi/hub-outline';
 	import MdiSettings from '~icons/mdi/settings';
 </script>
 
@@ -25,7 +25,7 @@
 		<MdiClose width="1.8em" height="1.8em" />
 	</label>
 	<MenuLink to="/" fullMatch>
-		<MdiHome width="24px" height="24px" slot="icon" />
+		<MdiHomeOutline width="24px" height="24px" slot="icon" />
 		首页
 	</MenuLink>
 	<MenuLink to="/tools/at">
@@ -47,6 +47,10 @@
 	<MenuLink to="/fake_realtime">
 		<MdiEarth width="24px" height="24px" slot="icon" />
 		伪全网犇
+	</MenuLink>
+	<MenuLink to="https://hub.benben.sbs">
+		<MdiHubOutline width="24px" height="24px" slot="icon" />
+		聚二甲犇 / Benben Hub
 	</MenuLink>
 	<li class="invisible flex-grow"></li>
 	<MenuLink>
