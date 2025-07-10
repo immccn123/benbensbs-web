@@ -37,9 +37,9 @@
 				href: 'https://qm.qq.com/q/Ktfwqoqqke'
 			},
 			{
-				src: 'https://static.imken.moe/bensite-advertising/te.webp',
-				alt: 'Tianyunn BBS',
-				href: 'http://www.tianyunn.top'
+				src: 'https://static.imken.moe/bensite-advertising/MC%20服务器广告画制作.webp',
+				alt: 'zhengddzz 的 mc 服务器玩家交流群',
+				href: 'https://qm.qq.com/q/k6L0rbtywg'
 			}
 		])
 	);
