@@ -10,7 +10,7 @@
 
 <div class="fixed bottom-1 right-1 z-10 min-w-56">
 	<div class="grid gap-1">
-		{#each Object.entries($notifications).sort((a, b) => +a[0] - +b[0]) as [key, { role, msg }] (key)}
+		{#each Object.entries($notifications).sort((a, b) => +b[0] - +a[0]) as [key, { role, msg }] (key)}
 			<div
 				animate:flip={{ duration: 300 }}
 				in:fly={{ x: 100, duration: 300 }}
