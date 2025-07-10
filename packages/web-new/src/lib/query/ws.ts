@@ -1,3 +1,4 @@
+import { browser } from '$app/environment';
 import { addNotification, removeNotification, updateNotification } from '$lib/state/notifications';
 import { writable } from 'svelte/store';
 
@@ -41,52 +42,54 @@ const initializeWs = () => {
 		ws.close();
 	}
 
-	ws = new WebSocket('wss://spider.benben.sbs/ws');
+	if (browser) {
+		ws = new WebSocket('wss://spider.benben.sbs/ws');
 
-	ws.onopen = () => {
-		connected.set(true);
-		startHeartbeat();
+		ws.onopen = () => {
+			connected.set(true);
+			startHeartbeat();
 
-		if (reconnectTimeout) {
-			clearTimeout(reconnectTimeout);
-			reconnectTimeout = null;
-		}
-	};
+			if (reconnectTimeout) {
+				clearTimeout(reconnectTimeout);
+				reconnectTimeout = null;
+			}
+		};
 
-	ws.onclose = () => {
-		connected.set(false);
-		clearHeartbeat();
+		ws.onclose = () => {
+			connected.set(false);
+			clearHeartbeat();
 
-		cleanupAllNotifications();
-		reconnect();
-	};
+			cleanupAllNotifications();
+			reconnect();
+		};
 
-	ws.onmessage = (event) => {
-		const data: Message = JSON.parse(event.data);
+		ws.onmessage = (event) => {
+			const data: Message = JSON.parse(event.data);
 
-		if (pendingUsers.includes(data.data.id)) {
-			pendingUsers.splice(pendingUsers.indexOf(data.data.id), 1);
-			subscribedUsers.push(data.data.id);
-			updateSubscriptionNotification();
-		}
+			if (pendingUsers.includes(data.data.id)) {
+				pendingUsers.splice(pendingUsers.indexOf(data.data.id), 1);
+				subscribedUsers.push(data.data.id);
+				updateSubscriptionNotification();
+			}
 
-		switch (data.type) {
-			case 'task_success':
-				handleTaskSuccess(data);
-				break;
-			case 'task_error':
-				handleTaskError(data);
-				break;
-			case 'task_progress':
-				handleTaskProgress(data);
-				break;
-			case 'task_retrying':
-				handleTaskRetrying(data);
-				break;
-			case 'communication_error':
-				break;
-		}
-	};
+			switch (data.type) {
+				case 'task_success':
+					handleTaskSuccess(data);
+					break;
+				case 'task_error':
+					handleTaskError(data);
+					break;
+				case 'task_progress':
+					handleTaskProgress(data);
+					break;
+				case 'task_retrying':
+					handleTaskRetrying(data);
+					break;
+				case 'communication_error':
+					break;
+			}
+		};
+	}
 
 	return ws;
 };
