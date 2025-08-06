@@ -22,7 +22,7 @@
 				href: 'https://qm.qq.com/q/f2Wp6MF5lu'
 			},
 			{
-				src: 'https://static.imken.moe/bensite-advertising/sleepingcup.png',
+				src: 'https://static.imken.moe/bensite-advertising/sleepingcup.webp',
 				alt: 'Sleeping Cup',
 				href: 'http://8.136.99.126'
 			},
