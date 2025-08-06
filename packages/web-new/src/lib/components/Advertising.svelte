@@ -22,19 +22,14 @@
 				href: 'https://qm.qq.com/q/f2Wp6MF5lu'
 			},
 			{
-				src: 'https://static.imken.moe/bensite-advertising/7-365654-exp241231.png',
-				alt: 'Sleeping Cup - by 365654',
+				src: 'https://static.imken.moe/bensite-advertising/sleepingcup.png',
+				alt: 'Sleeping Cup',
 				href: 'http://8.136.99.126'
 			},
 			{
 				src: 'https://static.imken.moe/bensite-advertising/test8.webp',
 				alt: 'OIer 观测者交流群 群号 946034915',
 				href: 'https://qm.qq.com/q/dAxBet1PE'
-			},
-			{
-				src: 'https://static.imken.moe/bensite-advertising/ad241128.webp',
-				alt: 'lymph-c1 解迷群 群号 312692217',
-				href: 'https://qm.qq.com/q/Ktfwqoqqke'
 			},
 			{
 				src: 'https://static.imken.moe/bensite-advertising/MC%20服务器广告画制作.webp',
