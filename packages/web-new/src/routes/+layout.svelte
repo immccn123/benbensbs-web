@@ -12,6 +12,7 @@
 	import MarkdownDialog from '$lib/components/MarkdownDialog.svelte';
 	import Announcement from '$lib/components/Announcement.svelte';
 	import SettingsProvider from '$lib/components/SettingsProvider.svelte';
+	import '$lib/redirect';
 
 	import { pwaInfo } from 'virtual:pwa-info';
 	import { ModeWatcher } from 'mode-watcher';
