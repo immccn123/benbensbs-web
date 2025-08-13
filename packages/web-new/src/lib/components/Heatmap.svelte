@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import * as d3 from 'd3';
 	import { systemPrefersMode } from 'mode-watcher';
 	export let data: API.Heatmap = [];

@@ -26,6 +26,7 @@
     "@types/eslint": "^9.6.1",
     "@types/html-minifier": "^4.0.5",
     "@types/markdown-it": "^14.1.2",
+    "@types/qrcode": "^1.5.5",
     "@vite-pwa/sveltekit": "^1.0.0",
     "daisyui": "^5.0.28",
     "eslint": "^9.25.1",
@@ -50,13 +51,12 @@
   "dependencies": {
     "@tanstack/svelte-query": "^5.74.4",
     "@zerodevx/svelte-json-view": "^1.0.11",
-    "awesome-qr": "2.1.5-rc.0",
     "chance": "^1.1.12",
     "cytoscape": "^3.31.2",
     "d3": "^7.9.0",
-    "html2canvas-pro": "^1.5.8",
     "markdown-it": "^14.1.0",
     "mode-watcher": "^0.5.1",
+    "qrcode": "^1.5.4",
     "rolldown": "1.0.0-beta.8",
     "svelty-picker": "^6.1.5",
     "typia": "^7.6.4"
