@@ -9,9 +9,14 @@
 	import { addSpiderTasks } from '$lib/query/spider';
 
 	$: followingUsers = $settings?.followedUsers ?? [];
-	const benbens = createQuery<API.Benben[]>({
-		queryKey: ['list'],
-		queryFn: createFetcher<API.Benben[]>(`/list`),
+
+	let currentTab: 'all' | 'following' = 'all';
+
+	$: benbens = createQuery<API.Benben[]>({
+		queryKey: ['list', currentTab],
+		queryFn: createFetcher<API.Benben[]>(
+			`/list` + (currentTab == 'all' ? '' : '?uids=' + followingUsers?.join(','))
+		),
 		refetchInterval: false,
 		refetchOnMount: false,
 		refetchIntervalInBackground: false,
@@ -39,14 +44,33 @@
 			</button>
 			<button
 				class="btn btn-sm join-item tooltip"
-				data-tip="前往设置可设置关注列表"
+				data-tip="前往设置（左下角）可设置关注列表"
 				disabled={$benbens.isFetching}
 				on:click={() => addSpiderTasks(followingUsers)}
 			>
-				请求抓取已关注用户
+				抓取关注用户
 			</button>
 		</div>
 	</h2>
+
+	<div class="tabs tabs-box">
+		<input
+			type="radio"
+			name="tab_1"
+			class="tab w-[50%]"
+			aria-label="全网动态"
+			checked={currentTab == 'all'}
+			on:change={(e) => e.currentTarget.checked && (currentTab = 'all')}
+		/>
+		<input
+			type="radio"
+			name="tab_2"
+			class="tab w-[50%]"
+			aria-label="我的关注"
+			checked={currentTab == 'following'}
+			on:change={(e) => e.currentTarget.checked && (currentTab = 'following')}
+		/>
+	</div>
 
 	<div class="mt-3">
 		{#if $benbens.isLoading}

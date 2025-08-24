@@ -3,7 +3,7 @@
 	import policy from './policy.md?raw';
 	import { setTitle } from '$lib/state/title';
 
-	setTitle('数据删除请求');
+	setTitle('数据移除与屏蔽申请说明');
 </script>
 
 <article class="prose mx-auto">

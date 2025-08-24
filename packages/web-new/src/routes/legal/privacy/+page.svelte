@@ -3,7 +3,7 @@
 	import policy from './policy.md?raw';
 	import { setTitle } from '$lib/state/title';
 
-	setTitle('隐私协议');
+	setTitle('隐私政策');
 </script>
 
 <article class="prose mx-auto">

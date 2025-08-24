@@ -40,7 +40,7 @@
 				}}
 				disabled={isFetching || $isLoading || uid === '' || uid === null}
 			>
-				请求抓取
+				抓取
 			</button>
 		</div>
 	</form>

@@ -11,12 +11,7 @@
 	const items: Announcement[] = [
 		{
 			type: 'normal',
-			contentHtml: '欢迎加入我们的用户讨论群！QQ 群号：313404608'
-		},
-		{
-			type: 'normal',
-			contentHtml:
-				'某算法竞赛社区用户动态发送累计数量动态演示 <a class="link" href="https://www.bilibili.com/video/BV1PL76zjEtE/">https://www.bilibili.com/video/BV1PL76zjEtE/</a>'
+			contentHtml: '欢迎加入用户讨论 QQ 群 313404608'
 		},
 		{
 			type: 'normal',
