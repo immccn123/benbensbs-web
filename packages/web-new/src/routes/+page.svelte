@@ -17,7 +17,7 @@
 
 	const randomBenben = createQuery<API.Benben>({
 		queryKey: ['/tools/getRandom'],
-		queryFn: createFetcher(`/tools/getRandom`),
+		queryFn: createFetcher(`/tools/getFeed/6661469`),
 		refetchOnMount: false,
 		refetchOnReconnect: false,
 		refetchOnWindowFocus: false
