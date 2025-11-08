@@ -61,7 +61,7 @@
 			<label class="fieldset-label">
 				<input
 					type="checkbox"
-					class="checkbox"
+					class="toggle"
 					bind:checked={$settings.markdownOptions.bilibili}
 				/>
 				解析 bilibili 视频

@@ -1,9 +1,11 @@
 @import 'tailwindcss';
+
 @plugin "daisyui" {
 	themes:
 		emerald --default,
 		dim --prefersdark;
 }
+
 @plugin "@tailwindcss/typography" {
 }
 
@@ -18,6 +20,11 @@
 		}
 	}
 }
+/* TaskNotification */
+@source inline("border-l-success border-l-warning border-l-error");
+
+/* Notification */
+@source inline("alert-warning alert-success alert-error");
 
 .prose pre {
 	overflow: scroll auto;
@@ -29,3 +36,4 @@
 		background-image: linear-gradient(270deg, red, orange, yellow, green, cyan, blue, violet, red);
 	}
 }
+

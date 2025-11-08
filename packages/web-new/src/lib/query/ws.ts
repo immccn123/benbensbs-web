@@ -1,5 +1,5 @@
 import { browser } from '$app/environment';
-import { addNotification, removeNotification, updateNotification } from '$lib/state/notifications';
+import { addTask, removeTask, updateTask } from '$lib/state/notifications';
 import { writable } from 'svelte/store';
 
 let ws: WebSocket | null = null;
@@ -12,29 +12,104 @@ const subscribedUsers: number[] = [];
 const pendingUsers: number[] = [];
 
 interface NotificationState {
-	subscription: number | null; // 订阅状态通知ID
-	queueing: Record<number, number>; // 用户ID -> 通知ID（排队状态）
-	crawling: number | null; // 用户ID -> 通知ID（抓取状态）
-	retrying: Record<number, number>; // 用户ID -> 通知ID（重试状态）
-	success: number | null;
-	pending: number | null;
+	mainNotificationId: number | null;
+	successCount: number;
+	failureCount: number; // 新增：失败计数
+	currentCrawlingUser: number | null;
+	currentCrawlingMessage: string;
+	retryingUsers: Set<number>;
 }
 
 const notificationState: NotificationState = {
-	subscription: null,
-	queueing: {},
-	retrying: {},
-	crawling: null,
-	success: null,
-	pending: null
+	mainNotificationId: null,
+	successCount: 0,
+	failureCount: 0, // 新增：初始化失败计数
+	currentCrawlingUser: null,
+	currentCrawlingMessage: '',
+	retryingUsers: new Set()
 };
 
-let successCount = 0;
+let cleanupTimeout: ReturnType<typeof setTimeout> | null = null;
 
 interface Message {
 	type: 'task_success' | 'task_error' | 'task_progress' | 'task_retrying' | 'communication_error';
 	data: { id: number; message: string };
 }
+
+const buildNotificationMessage = (): string => {
+	const parts: [string, number | string][] = [];
+	let current: null | string = null;
+	if (notificationState.currentCrawlingUser !== null) {
+		current = `当前 ${notificationState.currentCrawlingUser}<br>`;
+	}
+
+	if (pendingUsers.length > 0) parts.push([`订阅中`, pendingUsers.length]);
+	if (subscribedUsers.length > 0) parts.push([`排队`, subscribedUsers.length]);
+	if (notificationState.retryingUsers.size > 0)
+		parts.push([`重试`, notificationState.retryingUsers.size]);
+
+	parts.push([
+		`成功`,
+		`<span class="text-green-800 dark:text-green-600">${notificationState.successCount}</span>`
+	]);
+	parts.push([
+		`失败`,
+		`<span class="text-red-800 dark:text-red-600">${notificationState.failureCount}</span>`
+	]);
+
+	return `${current ?? ''}${parts.map(([a]) => a).join(' / ')}: ${parts.map(([_, b]) => b).join(' / ')} 个用户`;
+};
+
+const updateMainNotification = () => {
+	if (cleanupTimeout) {
+		clearTimeout(cleanupTimeout);
+		cleanupTimeout = null;
+	}
+
+	const hasActivity =
+		pendingUsers.length > 0 ||
+		subscribedUsers.length > 0 ||
+		notificationState.retryingUsers.size > 0 ||
+		notificationState.currentCrawlingUser !== null;
+
+	if (!hasActivity) {
+		if (notificationState.mainNotificationId !== null) {
+			const totalTasks = notificationState.successCount + notificationState.failureCount;
+
+			if (totalTasks > 0) {
+				const summaryMessage = `任务完成: 成功 ${notificationState.successCount} / 失败 ${notificationState.failureCount}`;
+				const summaryType = notificationState.failureCount > 0 ? 'warning' : 'success';
+
+				updateTask(notificationState.mainNotificationId, summaryType, summaryMessage, false);
+
+				cleanupTimeout = setTimeout(() => {
+					if (notificationState.mainNotificationId !== null) {
+						removeTask(notificationState.mainNotificationId);
+						notificationState.mainNotificationId = null;
+						notificationState.successCount = 0;
+						notificationState.failureCount = 0;
+					}
+					cleanupTimeout = null;
+				}, 5000);
+			} else {
+				removeTask(notificationState.mainNotificationId);
+				notificationState.mainNotificationId = null;
+				notificationState.successCount = 0;
+				notificationState.failureCount = 0;
+			}
+		}
+		return;
+	}
+
+	const message = buildNotificationMessage();
+	const type = notificationState.retryingUsers.size > 0 ? 'warning' : 'loading';
+
+	if (notificationState.mainNotificationId === null) {
+		notificationState.mainNotificationId = addTask(type, message, 0, true);
+	} else {
+		updateTask(notificationState.mainNotificationId, type, message, true);
+	}
+};
 
 const initializeWs = () => {
 	if (ws) {
@@ -58,7 +133,6 @@ const initializeWs = () => {
 		ws.onclose = () => {
 			connected.set(false);
 			clearHeartbeat();
-
 			cleanupAllNotifications();
 			reconnect();
 		};
@@ -69,7 +143,6 @@ const initializeWs = () => {
 			if (pendingUsers.includes(data.data.id)) {
 				pendingUsers.splice(pendingUsers.indexOf(data.data.id), 1);
 				subscribedUsers.push(data.data.id);
-				updateSubscriptionNotification();
 			}
 
 			switch (data.type) {
@@ -88,6 +161,8 @@ const initializeWs = () => {
 				case 'communication_error':
 					break;
 			}
+
+			updateMainNotification();
 		};
 	}
 
@@ -95,171 +170,54 @@ const initializeWs = () => {
 };
 
 const handleTaskSuccess = (data: Message) => {
-	removeUserStatusNotifications(data.data.id);
-
-	successCount++;
-	if (notificationState.success === null) {
-		notificationState.success = addNotification(
-			'success',
-			`已成功抓取 ${successCount} 个用户的数据`,
-			0,
-			true
-		);
-	} else {
-		updateNotification(
-			notificationState.success,
-			'success',
-			`已成功抓取 ${successCount} 个用户的数据`,
-			true
-		);
-	}
+	removeUserFromTracking(data.data.id);
+	notificationState.successCount++;
 };
 
 const handleTaskError = (data: Message) => {
-	removeUserStatusNotifications(data.data.id);
-	addNotification('error', `用户 ${data.data.id} 抓取失败: ${data.data.message}`);
+	removeUserFromTracking(data.data.id);
+	notificationState.failureCount++;
+	addTask('error', `用户 ${data.data.id} 抓取失败: ${data.data.message}`);
 };
 
 const handleTaskProgress = (data: Message) => {
-	if (notificationState.queueing[data.data.id]) {
-		removeNotification(notificationState.queueing[data.data.id]);
-		delete notificationState.queueing[data.data.id];
-	}
-
-	if (notificationState.retrying[data.data.id]) {
-		removeNotification(notificationState.retrying[data.data.id]);
-		delete notificationState.retrying[data.data.id];
-	}
-
-	if (notificationState.crawling) {
-		updateNotification(
-			notificationState.crawling,
-			'info',
-			`正在抓取用户 ${data.data.id} 的数据: ${data.data.message}`,
-			true
-		);
-	} else {
-		notificationState.crawling = addNotification(
-			'info',
-			`正在抓取用户 ${data.data.id} 的数据: ${data.data.message}`,
-			0,
-			true
-		);
-	}
+	notificationState.retryingUsers.delete(data.data.id);
+	notificationState.currentCrawlingUser = data.data.id;
+	notificationState.currentCrawlingMessage = data.data.message;
 };
 
 const handleTaskRetrying = (data: Message) => {
-	notificationState.retrying[data.data.id] = addNotification(
-		'warning',
-		`正在重试用户 ${data.data.id} 的抓取: ${data.data.message}`,
-		0,
-		true
-	);
+	notificationState.retryingUsers.add(data.data.id);
 };
 
-const updateSubscriptionNotification = () => {
-	const pendingCount = pendingUsers.length;
-	const subscribedCount = subscribedUsers.length;
-
-	if (pendingCount > 0) {
-		if (notificationState.pending === null) {
-			notificationState.pending = addNotification(
-				'info',
-				`正在订阅 ${pendingCount} 个用户的爬虫状态...`,
-				0,
-				true
-			);
-		} else {
-			updateNotification(
-				notificationState.pending,
-				'info',
-				`正在订阅 ${pendingCount} 个用户的爬虫状态...`,
-				true
-			);
-		}
-	} else {
-		if (notificationState.pending !== null) {
-			removeNotification(notificationState.pending);
-			notificationState.pending = null;
-		}
-	}
-	if (subscribedCount > 0) {
-		if (notificationState.subscription === null) {
-			notificationState.subscription = addNotification(
-				'info',
-				`排队中用户：共 ${subscribedCount} 名`,
-				0,
-				true
-			);
-		} else {
-			updateNotification(
-				notificationState.subscription,
-				'info',
-				`排队中用户：共 ${subscribedCount} 名`,
-				true
-			);
-		}
-	} else {
-		if (notificationState.subscription !== null) {
-			removeNotification(notificationState.subscription);
-			notificationState.subscription = null;
-		}
-	}
-
-	return notificationState.subscription;
-};
-
-const removeUserStatusNotifications = (userId: number) => {
+const removeUserFromTracking = (userId: number) => {
 	const index = subscribedUsers.indexOf(userId);
-	if (index !== -1) {
-		subscribedUsers.splice(index, 1);
-		updateSubscriptionNotification();
-	}
+	if (index !== -1) subscribedUsers.splice(index, 1);
 
-	if (notificationState.queueing[userId]) {
-		removeNotification(notificationState.queueing[userId]);
-		delete notificationState.queueing[userId];
-	}
+	notificationState.retryingUsers.delete(userId);
 
-	if (notificationState.retrying[userId]) {
-		removeNotification(notificationState.retrying[userId]);
-		delete notificationState.retrying[userId];
-	}
-
-	if (subscribedUsers.length === 0 && pendingUsers.length === 0) {
-		if (notificationState.crawling) {
-			removeNotification(notificationState.crawling);
-			notificationState.crawling = null;
-		}
-
-		setTimeout(() => cleanupAllNotifications(), 3000);
+	if (notificationState.currentCrawlingUser === userId) {
+		notificationState.currentCrawlingUser = null;
+		notificationState.currentCrawlingMessage = '';
 	}
 };
 
 export const cleanupAllNotifications = () => {
-	if (notificationState.subscription !== null) {
-		removeNotification(notificationState.subscription);
-		notificationState.subscription = null;
+	if (cleanupTimeout) {
+		clearTimeout(cleanupTimeout);
+		cleanupTimeout = null;
 	}
 
-	if (notificationState.success !== null) {
-		removeNotification(notificationState.success);
-		notificationState.success = null;
+	if (notificationState.mainNotificationId !== null) {
+		removeTask(notificationState.mainNotificationId);
+		notificationState.mainNotificationId = null;
 	}
 
-	if (notificationState.crawling !== null) {
-		removeNotification(notificationState.crawling);
-	}
-
-	// 清理所有用户状态通知
-	Object.values(notificationState.queueing).forEach(removeNotification);
-	Object.values(notificationState.retrying).forEach(removeNotification);
-
-	notificationState.queueing = {};
-	notificationState.crawling = null;
-	notificationState.retrying = {};
-
-	successCount = 0;
+	notificationState.successCount = 0;
+	notificationState.failureCount = 0; // 重置失败计数
+	notificationState.currentCrawlingUser = null;
+	notificationState.currentCrawlingMessage = '';
+	notificationState.retryingUsers.clear();
 };
 
 const reconnect = () => {
@@ -308,7 +266,7 @@ if (!ws) {
 
 export const subscribeTasks = (uids: number[]) => {
 	if (!ws || ws.readyState !== WebSocket.OPEN) {
-		addNotification('warning', '无法订阅爬虫状态。');
+		addTask('warning', '无法订阅爬虫状态。');
 		initializeWs();
 		return null;
 	}
@@ -327,12 +285,11 @@ export const subscribeTasks = (uids: number[]) => {
 	});
 
 	if (result.some((res) => res === false)) {
-		addNotification('error', '无法订阅部分爬虫状态。');
+		addTask('error', '无法订阅部分爬虫状态。');
 	}
 
-	const notificationId = updateSubscriptionNotification();
-
-	return notificationId;
+	updateMainNotification();
+	return notificationState.mainNotificationId;
 };
 
 export const unsubscribeTasks = (uids: number[]) => {
@@ -351,13 +308,12 @@ export const unsubscribeTasks = (uids: number[]) => {
 			subscribedUsers.splice(subscribedIndex, 1);
 		}
 
-		removeUserStatusNotifications(uid);
+		removeUserFromTracking(uid);
 
 		return sendMessage({ '-': { id: uid } });
 	});
 
-	updateSubscriptionNotification();
-
+	updateMainNotification();
 	return !result.some((res) => res === false);
 };
 
