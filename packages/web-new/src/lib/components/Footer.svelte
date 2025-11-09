@@ -1,13 +1,9 @@
 <script lang="ts">
-	import Ad from './Ad.svelte';
-
 	const runningDays = (
 		(new Date().getTime() - new Date('2023/07/01 13:05').getTime()) /
 		(1000 * 60 * 60 * 24)
 	).toFixed();
 </script>
-
-<Ad />
 
 <footer class="footer md:footer-horizontal bg-base-200 text-base-content p-10">
 	<aside>

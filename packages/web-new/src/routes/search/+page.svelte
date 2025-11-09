@@ -38,11 +38,11 @@
 		}
 		if (dateBefore)
 			queryParams.push(
-				`date_before=${!search ? new Date(dateBefore).getTime() * 1000 : dateBefore}`
+				`date_before=${!search ? new Date(dateBefore).toISOString() : dateBefore}`
 			);
 		if (dateAfter)
 			queryParams.push(
-				`date_after=${!search ? new Date(dateAfter).getTime() * 1000 : dateAfter}`
+				`date_after=${!search ? new Date(dateAfter).toISOString() : dateAfter}`
 			);
 		if (!search && loadMore && results.length)
 			queryParams.push(`id_after=${results.slice(-1)[0].id}`);
@@ -109,6 +109,8 @@
 					<SveltyPicker
 						bind:value={dateAfter}
 						inputClasses="input input-bordered w-full"
+						todayBtnClasses="btn btn-sm"
+						clearBtnClasses="btn btn-sm btn-error"
 						displayFormat="yyyy-mm-dd hh:ii"
 						format="yyyy-mm-dd hh:ii"
 						mode="datetime"
@@ -123,6 +125,8 @@
 					<SveltyPicker
 						bind:value={dateBefore}
 						inputClasses="input input-bordered w-full"
+						todayBtnClasses="btn btn-sm"
+						clearBtnClasses="btn btn-sm btn-error"
 						displayFormat="yyyy-mm-dd hh:ii"
 						format="yyyy-mm-dd hh:ii"
 						mode="datetime"
@@ -182,5 +186,20 @@
 <style scoped>
 	:global(.sdt-component-wrap) {
 		width: 100%;
+		background-color: var(--color-base-100);
+	}
+
+	:global(.sdt-calendar-wrap, .sdt-clock, .sdt-table, .sdt-cal-td) {
+		background-color: var(--color-base-100) !important;
+		box-shadow: none !important;
+	}
+
+	:global(.sdt-cal-td.is-selected) {
+		background-color: var(--color-base-300) !important;
+		box-shadow: none !important;
+	}
+
+	:global(.sdt-btn:hover) {
+		background-color: var(--color-base-200) !important;
 	}
 </style>

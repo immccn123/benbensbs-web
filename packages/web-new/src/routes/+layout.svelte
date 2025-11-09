@@ -16,6 +16,7 @@
 
 	import { pwaInfo } from 'virtual:pwa-info';
 	import { ModeWatcher } from 'mode-watcher';
+	import DisclaimerBox from '$lib/components/DisclaimerBox.svelte';
 
 	$: webManifestLink = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 </script>
@@ -68,6 +69,8 @@
 {#await import('$lib/components/ReloadPrompt.svelte') then { default: ReloadPrompt }}
 	<ReloadPrompt />
 {/await}
+
+<DisclaimerBox />
 
 <style scoped>
 	@media (min-width: 1024px) {
