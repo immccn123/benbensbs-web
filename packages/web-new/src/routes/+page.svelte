@@ -61,8 +61,8 @@
 	</div>
 
 	<h2 class="text-xl">添加抓取任务</h2>
-	<div class="flex items-center gap-2">
-		<div class="flex-1">
+	<div class="flex items-center gap-2 max-md:flex-col">
+		<div class="flex-1 max-md:w-full">
 			<div class="join w-full">
 				<input
 					type="number"
@@ -82,8 +82,8 @@
 				</button>
 			</div>
 		</div>
-		<div class="divider divider-horizontal my-0">或者</div>
-		<div class="flex-1">
+		<div class="divider divider-horizontal max-md:divider-vertical my-0">或者</div>
+		<div class="flex-1 max-md:w-full">
 			<button
 				class="btn tooltip rounded-box w-full"
 				data-tip="前往设置（左下角）可设置关注列表"
@@ -100,13 +100,13 @@
 
 	<h2 class="text-xl">赞助商广告</h2>
 	<div class="row-auto grid grid-flow-row items-stretch gap-2 lg:grid-cols-4">
+		<div class="lg:col-span-2">
+			<Advertising />
+		</div>
 		<div class="h-full lg:col-span-2">
 			<div>
 				<Ad />
 			</div>
-		</div>
-		<div class="lg:col-span-2">
-			<Advertising />
 		</div>
 	</div>
 </div>

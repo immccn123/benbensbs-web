@@ -27,7 +27,11 @@
 </div>
 
 {#if Object.keys($tasks).length}
-	<div class="fixed right-4 top-4 z-20 w-80 max-w-full">
+	<div
+		class="fixed right-4 top-4 z-20 w-80 max-w-full"
+		in:fade={{ duration: 100 }}
+		out:fade={{ duration: 100 }}
+	>
 		<div class="collapse-arrow bg-base-100 border-base-300 collapse border">
 			<input type="checkbox" bind:checked={isCollapsed} />
 			<div class="collapse-title cursor-pointer items-center">

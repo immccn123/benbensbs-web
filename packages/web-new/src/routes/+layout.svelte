@@ -12,11 +12,11 @@
 	import MarkdownDialog from '$lib/components/MarkdownDialog.svelte';
 	import Announcement from '$lib/components/Announcement.svelte';
 	import SettingsProvider from '$lib/components/SettingsProvider.svelte';
+	import DisclaimerBox from '$lib/components/DisclaimerBox.svelte';
+
 	import '$lib/redirect';
 
 	import { pwaInfo } from 'virtual:pwa-info';
-	import { ModeWatcher } from 'mode-watcher';
-	import DisclaimerBox from '$lib/components/DisclaimerBox.svelte';
 
 	$: webManifestLink = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 </script>
@@ -25,7 +25,6 @@
 	{@html webManifestLink}
 </svelte:head>
 
-<ModeWatcher />
 <NotificationStack />
 <HeadTitle />
 <ShareDialog />

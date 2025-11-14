@@ -6,6 +6,7 @@
 	import Ad from '$lib/components/Ad.svelte';
 	import Loader from '$lib/components/Loader.svelte';
 	import { setTitle } from '$lib/state/title';
+	import { download } from '$lib';
 
 	const isLoading = writable(false);
 
@@ -112,6 +113,11 @@
 			userPanningEnabled: false
 		});
 
+	$: cy &&
+		cy.on('dbltap', 'node', function (evt) {
+			open('https://www.luogu.com.cn/user/' + evt.target.id());
+		});
+
 	function fetchData() {
 		$isLoading = true;
 		showContainer = false;
@@ -161,11 +167,26 @@
 	{#if $isLoading}
 		<Loader>
 			少女祈祷中<br />此过程根据用户热度和缓存情况，时长不会不超过 1 分钟。请坐和放宽。
-			<Ad />
 		</Loader>
 	{/if}
 	{#if response?.cacheHit}
 		<span>这是缓存的结果。</span>
 	{/if}
-	<div bind:this={container} class={showContainer ? 'h-dvh border' : ''}></div>
+	<div
+		bind:this={container}
+		class={showContainer ? 'h-[600px] w-[600px] border max-md:h-[450px] max-md:w-[450px]' : ''}
+	></div>
+	<div class={['join mt-2', showContainer || 'hidden']}>
+		<button
+			class="btn join-item"
+			on:click={() => {
+				cy && download(cy?.png({ bg: '#1f1e33' }), `benben-circle-${Date.now()}`);
+			}}
+		>
+			下载
+		</button>
+		<button class="btn join-item" on:click|preventDefault={() => (response = response)}>
+			刷新布局
+		</button>
+	</div>
 </div>

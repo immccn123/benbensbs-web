@@ -3,7 +3,12 @@ import { browser } from '$app/environment';
 if (browser)
 	if (location.hostname.includes('imken.dev')) {
 		console.log('当前网址非主站；为了维护 imken.dev 的网址不被拦截，检测主站连通性后将自动跳转。');
-		const sites = ['https://benben.sbs', 'https://aws.benben.sbs'];
+		const sites = [
+			'https://benben.sbs',
+			'https://aws.benben.sbs',
+			'https://eo.benben.sbs',
+			'https://e.benben.sbs'
+		];
 
 		async function check() {
 			while (true) {
