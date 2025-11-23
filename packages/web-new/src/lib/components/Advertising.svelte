@@ -32,9 +32,9 @@
 				href: 'https://qm.qq.com/q/dAxBet1PE'
 			},
 			{
-				src: 'https://static.imken.moe/bensite-advertising/MC%20服务器广告画制作.webp',
-				alt: 'zhengddzz 的 mc 服务器玩家交流群',
-				href: 'https://qm.qq.com/q/k6L0rbtywg'
+				src: 'https://static.imken.moe/bensite-advertising/Image_1759676244211.webp',
+				alt: '点击链接加入群聊【方块人豆皮铺 || MCCOM社区开业啦】',
+				href: 'https://qm.qq.com/q/GvqfKQD8gS'
 			}
 		])
 	);
