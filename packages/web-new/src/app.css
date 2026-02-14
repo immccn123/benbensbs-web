@@ -2,8 +2,112 @@
 
 @plugin "daisyui" {
 	themes:
-		emerald --default,
-		dim --prefersdark;
+		iknlight --default,
+		ikndark --prefersdark;
+}
+
+@plugin "daisyui/theme" {
+	name: "iknlight";
+	default: true; /* set as default */
+	prefersdark: false; /* set as default dark mode (prefers-color-scheme:dark) */
+	color-scheme: light; /* color of browser-provided UI */
+
+	--color-base-100: #fff5f5;
+	--color-base-200: #fcecec;
+	--color-base-300: #f7dede;
+	--color-base-content: #1f2937;
+
+	--color-primary: #985e68;
+	--color-primary-content: #ffffff;
+
+	--color-secondary: #c48c94;
+	--color-secondary-content: #1f2937;
+
+	--color-accent: #e4bfc4;
+	--color-accent-content: #1f2937;
+
+	--color-neutral: #3d3d3d;
+	--color-neutral-content: #f3f4f6;
+
+	--color-info: #2563eb;
+	--color-info-content: #f8fafc;
+
+	--color-success: #2b8f4c;
+	--color-success-content: #ffffff;
+
+	--color-warning: #b45309;
+	--color-warning-content: #fff7ed;
+
+	--color-error: #b91c1c;
+	--color-error-content: #fef2f2;
+
+	/* border radius */
+	--radius-selector: 1rem;
+	--radius-field: 1rem;
+	--radius-box: 0.5rem;
+
+	/* base sizes */
+	--size-selector: 0.25rem;
+	--size-field: 0.25rem;
+
+	/* border size */
+	--border: 1px;
+
+	/* effects */
+	--depth: 0;
+	--noise: 0;
+}
+
+@plugin "daisyui/theme" {
+	name: "ikndark";
+	default: false;
+	prefersdark: true;
+	color-scheme: dark;
+
+	--color-base-100: #151313; /* 深灰背景 */
+	--color-base-200: #201d1d;
+	--color-base-300: #3a3a3a;
+	--color-base-content: #eaeaea; /* 浅灰白文字 */
+
+	--color-primary: #d68e9c; /* 提亮后的主色 */
+	--color-primary-content: #ffffff;
+
+	--color-secondary: #d3a0a8;
+	--color-secondary-content: #1f1f1f;
+
+	--color-accent: #eabfc4;
+	--color-accent-content: #1f1f1f;
+
+	--color-neutral: #4a4a4a;
+	--color-neutral-content: #f3f4f6;
+
+	--color-info: #60a5fa;
+	--color-info-content: #1e3a8a;
+
+	--color-success: #46a766; /* 提亮后的绿色 */
+	--color-success-content: #ffffff;
+
+	--color-warning: #f6ad55;
+	--color-warning-content: #1f1f1f;
+
+	--color-error: #f87171;
+	--color-error-content: #1f1f1f;
+
+	/* border radius */
+	--radius-selector: 1rem;
+	--radius-field: 1rem;
+	--radius-box: 0.5rem;
+
+	/* base sizes */
+	--size-selector: 0.25rem;
+	--size-field: 0.25rem;
+
+	/* border size */
+	--border: 1px;
+
+	/* effects */
+	--depth: 0;
+	--noise: 0;
 }
 
 @plugin "@tailwindcss/typography" {

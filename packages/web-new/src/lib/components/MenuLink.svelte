@@ -13,7 +13,7 @@
 	export let fullMatch = false;
 </script>
 
-<li class:menu-disabled={to === undefined} class:menu-title={title}>
+<li class={[to === undefined && "menu-disabled", title && "menu-title", "w-fit","hover:w-56", "relative"]}>
 	{#if to !== undefined}
 		<a
 			class="overflow-hidden text-nowrap"

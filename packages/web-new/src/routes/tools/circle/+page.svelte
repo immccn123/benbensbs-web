@@ -3,7 +3,6 @@
 	import { addNotification } from '$lib/state/notifications';
 	import cytoscape from 'cytoscape';
 	import { writable } from 'svelte/store';
-	import Ad from '$lib/components/Ad.svelte';
 	import Loader from '$lib/components/Loader.svelte';
 	import { setTitle } from '$lib/state/title';
 	import { download } from '$lib';

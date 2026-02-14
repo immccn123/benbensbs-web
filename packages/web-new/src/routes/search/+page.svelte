@@ -36,14 +36,16 @@
 			const senders = senderText.split(',').map((x) => +x.trim());
 			senders.forEach((value) => queryParams.push(`senders=${value}`));
 		}
-		if (dateBefore)
-			queryParams.push(
-				`date_before=${!search ? new Date(dateBefore).toISOString() : dateBefore}`
-			);
-		if (dateAfter)
-			queryParams.push(
-				`date_after=${!search ? new Date(dateAfter).toISOString() : dateAfter}`
-			);
+		if (dateBefore) {
+			const date = new Date(dateBefore);
+			const formatted = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+			queryParams.push(`date_before=${search ? dateBefore : formatted}`);
+		}
+		if (dateAfter) {
+			const date = new Date(dateAfter);
+			const formatted = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+			queryParams.push(`date_after=${search ? dateAfter : formatted}`);
+		}
 		if (!search && loadMore && results.length)
 			queryParams.push(`id_after=${results.slice(-1)[0].id}`);
 		return queryParams.join('&');

@@ -16,9 +16,8 @@
 <ul
 	class="
 		menu menu-md bg-base-100 z-50 flex min-h-full
-		overflow-hidden max-lg:w-56 lg:fixed lg:top-0
-		lg:w-[4rem] lg:shadow lg:hover:w-56
-		lg:hover:shadow-xl lg:motion-safe:transition-[all!important]
+		max-lg:w-56 lg:fixed lg:top-0
+		lg:w-[4rem] lg:shadow
 	"
 >
 	<label for="sidebar-toggle" class="btn drawer-button btn-square btn-ghost mb-1 lg:hidden">
@@ -76,14 +75,8 @@
 		}
 	}
 
-	:global(.menu:hover *[data-content]) {
+	:global(.menu li:hover *[data-content]) {
 		display: unset;
 		opacity: 1;
-		position: static;
-	}
-
-	.menu {
-		transition-timing-function: cubic-bezier(0.22, 0.685, 0.03, 0.895);
-		transition-duration: 0.3s;
 	}
 </style>
