@@ -22,11 +22,6 @@
 				href: 'https://qm.qq.com/q/f2Wp6MF5lu'
 			},
 			{
-				src: 'https://static.imken.moe/bensite-advertising/sleepingcup.webp',
-				alt: 'Sleeping Cup',
-				href: 'http://8.136.99.126'
-			},
-			{
 				src: 'https://static.imken.moe/bensite-advertising/test8.webp',
 				alt: 'OIer 观测者交流群 群号 946034915',
 				href: 'https://qm.qq.com/q/dAxBet1PE'
