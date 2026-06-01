@@ -64,6 +64,13 @@ declare global {
 			loop_status: ProcessState;
 		}
 
+		export interface Diagnostic {
+			$monitor: string;
+			database: 'up' | 'down';
+			redis: 'up' | 'down';
+			version: string;
+		}
+
 		export interface UserBenbens {
 			feeds: Benben[];
 			count: number;

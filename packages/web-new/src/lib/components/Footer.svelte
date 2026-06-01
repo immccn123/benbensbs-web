@@ -1,8 +1,12 @@
 <script lang="ts">
+	import { createDiagnosticQuery } from '$lib/query';
+
 	const runningDays = (
 		(new Date().getTime() - new Date('2023/07/01 13:05').getTime()) /
 		(1000 * 60 * 60 * 24)
 	).toFixed();
+
+	const diagnostic = createDiagnosticQuery();
 </script>
 
 <footer class="footer md:footer-horizontal bg-base-200 text-base-content p-10">
@@ -26,12 +30,15 @@
 		</p>
 		<p>
 			支持我们继续做下去！
-			<a class="link link-error link-hover" href="https://sponsor.imken.moe/"
-				>捐赠（请备注为犇站）</a
-			>
+			<a class="link link-error link-hover" href="https://sponsor.imken.moe/">
+				捐赠（请备注为犇站）
+			</a>
 		</p>
 		<p>
 			<code>F: {__VERSION__} ({__LASTMOD__})</code>
+			{#if $diagnostic.isSuccess}
+				<code> B: {$diagnostic.data.version}</code>
+			{/if}
 			<a
 				class="link link-hover"
 				target="_blank"
