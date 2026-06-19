@@ -105,7 +105,6 @@
 						抓取
 					</button>
 				</div>
-				<p class="mt-2 text-xs opacity-50">支持回车提交，任务自动进入队列</p>
 			</div>
 			<div>
 				<span class="mb-2 block text-sm font-medium">批量抓取关注用户</span>
@@ -127,13 +126,6 @@
 							<span class="badge badge-neutral ml-auto">{followingUsers.length}</span>
 						{/if}
 					</button>
-					{#if followingUsers.length === 0}
-						<p class="text-warning text-xs">
-							暂未设置关注用户，请前往左下角「设置」添加
-						</p>
-					{:else}
-						<p class="text-xs opacity-50">抓取所有关注用户的最新犇犇</p>
-					{/if}
 				</div>
 			</div>
 		</div>
@@ -172,15 +164,6 @@
 					<span class="badge badge-ghost">未知</span>
 				{/if}
 			</div>
-			{#if $diagnostic.isSuccess}
-				<div class="text-xs">
-					{#if $diagnostic.data.database === 'up' && $diagnostic.data.redis === 'up'}
-						<span class="badge badge-ghost text-success gap-1">● 全部正常</span>
-					{:else}
-						<span class="badge badge-ghost text-warning gap-1">● 部分异常</span>
-					{/if}
-				</div>
-			{/if}
 		</div>
 	</div>
 
