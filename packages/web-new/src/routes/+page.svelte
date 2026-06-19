@@ -33,7 +33,7 @@
 </script>
 
 <div class="mx-auto max-w-7xl px-6">
-	<PageTitle title="犇站看板" subtitle="实时数据 · 抓取任务 · 服务状态" />
+	<PageTitle title="犇站看板" subtitle="Kanban" />
 	<div class="mb-16 grid grid-cols-1 gap-12 md:grid-cols-2">
 		<div>
 			<div class="mb-4 flex items-center gap-2 text-sm font-medium tracking-wide uppercase">
