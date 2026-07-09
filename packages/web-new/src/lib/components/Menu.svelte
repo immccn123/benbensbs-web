@@ -75,7 +75,7 @@
 			text-wrap: nowrap;
 			white-space: nowrap;
 			opacity: 0;
-		pointer-events: none;
+			pointer-events: none;
 			position: absolute;
 			left: calc(32px + 1rem);
 		}
