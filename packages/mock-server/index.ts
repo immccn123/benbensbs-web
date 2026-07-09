@@ -144,6 +144,25 @@ app.get("/tools/getFeed/:id", (req, res, _next) => {
   res.json({ ...randomBenben(), id: parseInt(req.params.id) });
 });
 
+app.get("/fun/duel", (req, res, _next) => {
+  res.json({
+    code: 200,
+    data: {
+      divergence: faker.number.float({ min: -3, max: 3, fractionDigits: 6 }),
+      duplicate_rate: faker.number.float({ min: 0, max: 0.3, fractionDigits: 6 }),
+      entropy: {
+        mean_ratio: faker.number.float({ min: 0.6, max: 1.4, fractionDigits: 6 }),
+        std_diff: faker.number.float({ min: 0, max: 0.1, fractionDigits: 6 }),
+      },
+      sample_count_a: faker.number.int({ min: 100, max: 500 }),
+      sample_count_b: faker.number.int({ min: 100, max: 500 }),
+      topic_resonance: faker.number.float({ min: 0, max: 1, fractionDigits: 6 }),
+      uid_a: parseInt((req.query.uid_a as string) ?? "0"),
+      uid_b: parseInt((req.query.uid_b as string) ?? "0"),
+    },
+  });
+});
+
 app.get("/:id", (_req, res, _next) => {
   res.send("Ok");
 });

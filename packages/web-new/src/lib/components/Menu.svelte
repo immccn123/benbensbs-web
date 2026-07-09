@@ -10,6 +10,7 @@
 	import MdiStars from '~icons/mdi/stars';
 	import MdiEarth from '~icons/mdi/earth';
 	import MdiHubOutline from '~icons/mdi/hub-outline';
+	import MdiCompare from '~icons/mdi/compare';
 	import MdiSettings from '~icons/mdi/settings';
 </script>
 
@@ -34,6 +35,10 @@
 	<MenuLink to="/tools/circle">
 		<MdiDotsCircle width="24px" height="24px" slot="icon" />
 		犇圈
+	</MenuLink>
+	<MenuLink to="/fun/duel">
+		<MdiCompare width="24px" height="24px" slot="icon" />
+		相似度匹配
 	</MenuLink>
 	<MenuLink to="/user">
 		<MdiHistory width="24px" height="24px" slot="icon" />
@@ -70,6 +75,7 @@
 			text-wrap: nowrap;
 			white-space: nowrap;
 			opacity: 0;
+		pointer-events: none;
 			position: absolute;
 			left: calc(32px + 1rem);
 		}
@@ -78,5 +84,6 @@
 	:global(.menu li:hover *[data-content]) {
 		display: unset;
 		opacity: 1;
+		pointer-events: auto;
 	}
 </style>

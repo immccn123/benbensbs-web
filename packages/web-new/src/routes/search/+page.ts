@@ -1,4 +1,4 @@
-import type { PageLoad } from "./$types";
+import type { PageLoad } from './$types';
 
 export const load: PageLoad = ({ url: requestUrl }) => {
 	const url = new URL(requestUrl);

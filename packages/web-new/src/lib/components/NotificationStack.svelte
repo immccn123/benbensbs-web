@@ -9,7 +9,7 @@
 	let isCollapsed = true;
 </script>
 
-<div class="fixed bottom-1 right-1 z-10 min-w-56">
+<div class="fixed right-1 bottom-1 z-10 min-w-56">
 	<div class="grid gap-1">
 		{#each Object.entries($notifications).sort((a, b) => +b[0] - +a[0]) as [key, { role, msg, lasting }] (key)}
 			<div
@@ -28,7 +28,7 @@
 
 {#if Object.keys($tasks).length}
 	<div
-		class="fixed right-4 top-4 z-20 w-80 max-w-full"
+		class="fixed top-4 right-4 z-20 w-80 max-w-full"
 		in:fade={{ duration: 100 }}
 		out:fade={{ duration: 100 }}
 	>

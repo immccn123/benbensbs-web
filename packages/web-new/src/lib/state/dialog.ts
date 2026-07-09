@@ -6,7 +6,7 @@ export const shareDialogStore = writable<{ id: number | null; element: HTMLDivEl
 });
 
 export function showShareDialog(id: number, element: HTMLDivElement) {
-    shareDialogStore.set({ id, element });
+	shareDialogStore.set({ id, element });
 }
 
 export const markdownDialogStore = writable<{ id: number | null; content: string | null }>({

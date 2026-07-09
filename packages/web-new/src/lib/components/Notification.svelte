@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let role: string
+	export let role: string;
 </script>
 
 <div role="alert" class="alert alert-{role} ">

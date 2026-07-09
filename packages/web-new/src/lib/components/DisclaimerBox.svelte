@@ -236,7 +236,7 @@
 					disabled={!ok}
 				>
 					<div
-						class="duration-25 absolute left-0 top-0 z-20 h-full bg-black/20 transition-all"
+						class="absolute top-0 left-0 z-20 h-full bg-black/20 transition-all duration-25"
 						style="width: {holdProgress}%"
 					></div>
 					<span class="relative z-10">

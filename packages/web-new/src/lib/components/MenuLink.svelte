@@ -13,7 +13,15 @@
 	export let fullMatch = false;
 </script>
 
-<li class={[to === undefined && "menu-disabled", title && "menu-title", "w-fit","hover:w-56", "relative"]}>
+<li
+	class={[
+		to === undefined && 'menu-disabled',
+		title && 'menu-title',
+		'w-fit',
+		'hover:w-56',
+		'relative'
+	]}
+>
 	{#if to !== undefined}
 		<a
 			class="overflow-hidden text-nowrap"
@@ -26,7 +34,7 @@
 			{:else}
 				<svg height="28px" width="28px"></svg>
 			{/if}
-			<span class="inline-block text-nowrap py-0 transition-opacity" data-content>
+			<span class="inline-block py-0 text-nowrap transition-opacity" data-content>
 				<slot />
 			</span>
 		</a>
@@ -37,7 +45,7 @@
 			{:else}
 				<svg height="28px" width="28px"></svg>
 			{/if}
-			<span class="text-nowrap py-0 transition-opacity" data-content>
+			<span class="py-0 text-nowrap transition-opacity" data-content>
 				<slot />
 			</span>
 		</span>

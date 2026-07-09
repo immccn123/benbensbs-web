@@ -18,6 +18,20 @@ declare global {
 	}
 
 	namespace API {
+		export interface Duel {
+			divergence: number;
+			duplicate_rate: number;
+			entropy: {
+				mean_ratio: number;
+				std_diff: number;
+			};
+			sample_count_a: number;
+			sample_count_b: number;
+			topic_resonance: number;
+			uid_a: number;
+			uid_b: number;
+		}
+
 		export type Heatmap = {
 			date: string;
 			count: number;

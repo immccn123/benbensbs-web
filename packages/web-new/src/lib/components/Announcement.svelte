@@ -15,7 +15,8 @@
 		},
 		{
 			type: 'normal',
-			contentHtml: '<a class="link" target="_blank" href="https://hub.benben.sbs/ccb">洛谷笑传之猜猜犇</a>'
+			contentHtml:
+				'<a class="link" target="_blank" href="https://hub.benben.sbs/ccb">洛谷笑传之猜猜犇</a>'
 		},
 		{
 			type: 'warning',
@@ -46,7 +47,7 @@
 		{#key activeItemId}
 			<div
 				role="alert"
-				class="alert m-3 alert-{activeItem.type} relative left-0 top-0"
+				class="alert m-3 alert-{activeItem.type} relative top-0 left-0"
 				out:fly={{ duration: 100, y: 24 }}
 				in:fly={{ delay: 100, y: -24 }}
 			>

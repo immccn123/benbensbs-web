@@ -21,7 +21,7 @@
 <div class="mt-3 grid gap-3">
 	<div class="mx-auto text-center">
 		<div>
-			<div class="avatar w-45 border-xl rounded-full">
+			<div class="avatar border-xl w-45 rounded-full">
 				<img
 					alt="{$initialUid} 的头像"
 					class="not-prose"

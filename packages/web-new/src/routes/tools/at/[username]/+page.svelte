@@ -23,7 +23,7 @@
 	$: $isLoading = $benbens.isLoading;
 </script>
 
-<div class="grid gap-3 mt-3">
+<div class="mt-3 grid gap-3">
 	{#if $benbens.isLoading}
 		<Loader />
 	{:else if $benbens.isSuccess}

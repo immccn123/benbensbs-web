@@ -67,7 +67,7 @@
 </div>
 
 <div class="sticky bottom-2 mt-2 flex items-end justify-center">
-	<div class="card card-sm bg-base-100 w-120 card-border shadow">
+	<div class="card card-sm bg-base-100 card-border w-120 shadow">
 		<div class="card-body">
 			<div class="join justify-center">
 				<a class="join-item btn {$isLoading && 'btn-disabled'}" href="/user/{uid}/1">

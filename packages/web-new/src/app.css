@@ -7,7 +7,7 @@
 }
 
 @plugin "daisyui/theme" {
-	name: "iknlight";
+	name: 'iknlight';
 	default: true; /* set as default */
 	prefersdark: false; /* set as default dark mode (prefers-color-scheme:dark) */
 	color-scheme: light; /* color of browser-provided UI */
@@ -59,7 +59,7 @@
 }
 
 @plugin "daisyui/theme" {
-	name: "ikndark";
+	name: 'ikndark';
 	default: false;
 	prefersdark: true;
 	color-scheme: dark;
@@ -140,4 +140,3 @@
 		background-image: linear-gradient(270deg, red, orange, yellow, green, cyan, blue, violet, red);
 	}
 }
-

@@ -35,7 +35,7 @@
 			}
 		}
 
-		console.log("现在可以选中复制下列结果：")
+		console.log('现在可以选中复制下列结果：');
 		console.log(followings.join(', '));
 	}
 })();
