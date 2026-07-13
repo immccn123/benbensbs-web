@@ -8,6 +8,9 @@ import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 
 import UnpluginTypia from '@ryoppippi/unplugin-typia/vite';
 
+import svg from '@poppanator/sveltekit-svg'
+
+
 // Get current tag/commit and last commit date from git
 const pexec = promisify(exec);
 const [version, lastmod] = (
@@ -42,7 +45,8 @@ export default defineConfig({
 				navigateFallback: '/index.html'
 				// navigateFallbackDenylist: [/^\/user\//]
 			}
-		})
+		}),
+		svg()
 	],
 	define: {
 		__VERSION__: `"${version}"`,

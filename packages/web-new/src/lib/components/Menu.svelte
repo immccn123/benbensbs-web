@@ -12,6 +12,8 @@
 	import MdiHubOutline from '~icons/mdi/hub-outline';
 	import MdiCompare from '~icons/mdi/compare';
 	import MdiSettings from '~icons/mdi/settings';
+
+	import LgsLogo from '../../assets/lgslogo.svg?component';
 </script>
 
 <ul
@@ -52,10 +54,31 @@
 		<MdiEarth width="24px" height="24px" slot="icon" />
 		伪全网犇
 	</MenuLink>
+
+	<MenuLink>
+		<svg height="8px" width="28px" slot="icon">
+			<line
+				x1="0"
+				y1="4"
+				x2="24"
+				y2="4"
+				stroke="#333333"
+				stroke-width="1"
+				stroke-linecap="round"
+			/>
+		</svg>
+	</MenuLink>
+
 	<MenuLink to="https://hub.benben.sbs">
 		<MdiHubOutline width="24px" height="24px" slot="icon" />
 		聚二甲犇 / Benben Hub
 	</MenuLink>
+
+	<MenuLink to="https://www.luogu.me">
+		<LgsLogo width="22px" height="24px" slot="icon" />
+		洛谷保存站
+	</MenuLink>
+
 	<li class="invisible flex-grow"></li>
 	<MenuLink>
 		<MdiStars width="24px" height="24px" slot="icon" />

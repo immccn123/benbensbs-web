@@ -2,6 +2,8 @@ import 'unplugin-icons/types/svelte';
 import 'vite-plugin-pwa/svelte';
 import 'vite-plugin-pwa/client';
 import 'vite-plugin-pwa/info';
+import '@poppanator/sveltekit-svg/dist/svg.d.ts';
+
 
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
@@ -101,4 +103,4 @@ declare global {
 	}
 }
 
-export {};
+export { };
