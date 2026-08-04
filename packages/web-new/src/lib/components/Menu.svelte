@@ -69,9 +69,9 @@
 		</svg>
 	</MenuLink>
 
-	<MenuLink to="https://hub.benben.sbs">
+	<MenuLink to="https://olsi.benben.sbs">
 		<MdiHubOutline width="24px" height="24px" slot="icon" />
-		聚二甲犇 / Benben Hub
+		OLSI
 	</MenuLink>
 
 	<MenuLink to="https://www.luogu.me">
