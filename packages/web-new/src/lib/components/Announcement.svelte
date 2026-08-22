@@ -12,15 +12,6 @@
 		{
 			type: 'normal',
 			contentHtml: '欢迎加入用户讨论 QQ 群 313404608'
-		},
-		{
-			type: 'normal',
-			contentHtml:
-				'<a class="link" target="_blank" href="https://hub.benben.sbs/ccb">洛谷笑传之猜猜犇</a>'
-		},
-		{
-			type: 'warning',
-			contentHtml: '<a class="link" href="https://sponsor.imken.moe">捐赠</a>帮助我们活下去！'
 		}
 	];
 

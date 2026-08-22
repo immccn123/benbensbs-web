@@ -1,5 +1,6 @@
 import { browser } from '$app/environment';
 import { addTask, removeTask, updateTask } from '$lib/state/notifications';
+import { getSpiderWsUrl } from '$lib/config/base';
 import { writable } from 'svelte/store';
 
 let ws: WebSocket | null = null;
@@ -118,7 +119,7 @@ const initializeWs = () => {
 	}
 
 	if (browser) {
-		ws = new WebSocket('wss://spider.benben.sbs/ws');
+		ws = new WebSocket(getSpiderWsUrl());
 
 		ws.onopen = () => {
 			connected.set(true);
@@ -167,6 +168,14 @@ const initializeWs = () => {
 	}
 
 	return ws;
+};
+
+export const reconnectWs = () => {
+	if (reconnectTimeout) {
+		clearTimeout(reconnectTimeout);
+		reconnectTimeout = null;
+	}
+	initializeWs();
 };
 
 const handleTaskSuccess = (data: Message) => {

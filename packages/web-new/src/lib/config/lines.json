@@ -1,0 +1,14 @@
+{
+	"api": [
+		{ "name": "主线 (Cloudflare)", "url": "https://core.benben.sbs" },
+		{ "name": "代理1 (Fastly)", "url": "https://fcore.benben.sbs" }
+	],
+	"spider": [{ "name": "主线路", "url": "https://spider.benben.sbs" }],
+	"frontend": [
+		{ "name": "主站 (Cloudflare Pages)", "url": "https://benben.sbs" },
+		{ "name": "主备1 (AWS Cloudfront, 源站 EO Pages)", "url": "https://aws.benben.sbs" },
+		{ "name": "主备2 (EdgeOne 国际)", "url": "https://eo.benben.sbs" },
+		{ "name": "主备3 (EdgeOne Pages)", "url": "https://e.benben.sbs" },
+		{ "name": "主备4 (Vercel 线路)", "url": "https://v.benben.sbs" }
+	]
+}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PUBLIC_API_BASE } from '$env/static/public';
+	import { getApiBase } from '$lib/config/base';
 	import { addNotification } from '$lib/state/notifications';
 	import cytoscape from 'cytoscape';
 	import { writable } from 'svelte/store';
@@ -123,7 +123,7 @@
 		cy?.destroy();
 		response = undefined;
 		uid = uidInput;
-		fetch(`${PUBLIC_API_BASE}/tools/circle/${uid}`)
+		fetch(`${getApiBase()}/tools/circle/${uid}`)
 			.then((res) => {
 				if (res.status !== 200) {
 					throw '生成超时。但其实服务器后台也应该在生成，所以';

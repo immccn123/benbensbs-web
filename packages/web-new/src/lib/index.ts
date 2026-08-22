@@ -1,4 +1,4 @@
-import { PUBLIC_API_BASE } from '$env/static/public';
+import { getApiBase } from '$lib/config/base';
 import { toDataURL as createQrCode } from 'qrcode';
 
 export function download(url: string, name: string) {
@@ -17,7 +17,7 @@ export const copyText = (text: string) => {
 export const createFetcher =
 	<T = unknown>(path: string) =>
 	async () =>
-		await fetch(`${PUBLIC_API_BASE}${path}`).then((res) => res.json() as T);
+		await fetch(`${getApiBase()}${path}`).then((res) => res.json() as T);
 
 export const isProcessDied = (status: API.ProcessState) =>
 	status === 'FATAL' || status === 'EXITED' || status === 'STOPPED' || status === 'BACKOFF';

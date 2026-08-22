@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { settings } from '$lib/store/settings';
+	import LineChecker from '$lib/components/LineChecker.svelte';
 
 	export let data;
 
@@ -91,6 +92,7 @@
 
 		<div class="text-error mt-1 text-sm">{followedUsersError}</div>
 	</fieldset>
+
 	<div class="collapse-arrow border-base-300 collapse mt-4 border">
 		<input type="checkbox" class="peer" bind:checked={showHelp} />
 		<div class="collapse-title text">自动获取关注列表</div>
@@ -101,4 +103,9 @@
 			</div>
 		</div>
 	</div>
+
+	<fieldset class="fieldset bg-base-100 border-base-300 rounded-box border p-4">
+		<legend class="fieldset-legend">线路检测</legend>
+		<LineChecker />
+	</fieldset>
 </div>

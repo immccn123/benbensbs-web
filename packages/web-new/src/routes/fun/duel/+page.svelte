@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PUBLIC_API_BASE } from '$env/static/public';
+	import { getApiBase } from '$lib/config/base';
 	import { setTitle } from '$lib/state/title';
 	import { tick } from 'svelte';
 	import Loader from '$lib/components/Loader.svelte';
@@ -35,7 +35,7 @@
 		errorText = '';
 		result = undefined;
 		try {
-			const res = await fetch(`${PUBLIC_API_BASE}/fun/duel?uid_a=${uidA}&uid_b=${uidB}`);
+			const res = await fetch(`${getApiBase()}/fun/duel?uid_a=${uidA}&uid_b=${uidB}`);
 			const text = await res.text();
 			let json: any;
 			try {
@@ -86,12 +86,6 @@
 		const pct = (v * 100).toFixed(2) + '%';
 		if (v > 0.3) return { text: pct, warn: '可能存在相互复读' };
 		return { text: pct, warn: '' };
-	}
-
-	function sideBorder(side: 'a' | 'b' | '') {
-		if (side === 'a') return 'border-l-4 border-l-warning';
-		if (side === 'b') return 'border-r-4 border-r-warning';
-		return '';
 	}
 </script>
 

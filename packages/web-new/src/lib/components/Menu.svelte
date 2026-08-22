@@ -1,5 +1,7 @@
 <script lang="ts">
 	import MenuLink from './MenuLink.svelte';
+	import { dropLeaf } from '$lib/state/leaf';
+	import { addNotification } from '$lib/state/notifications';
 
 	import MdiClose from '~icons/mdi/close';
 	import MdiHomeOutline from '~icons/mdi/home-outline';
@@ -7,13 +9,27 @@
 	import MdiDotsCircle from '~icons/mdi/dots-circle';
 	import MdiHistory from '~icons/mdi/history';
 	import MdiSearch from '~icons/mdi/search';
-	import MdiStars from '~icons/mdi/stars';
+	import MdiLeaf from '~icons/mdi/leaf';
 	import MdiEarth from '~icons/mdi/earth';
 	import MdiHubOutline from '~icons/mdi/hub-outline';
 	import MdiCompare from '~icons/mdi/compare';
 	import MdiSettings from '~icons/mdi/settings';
 
 	import LgsLogo from '../../assets/lgslogo.svg?component';
+
+	let leafClicks = 0;
+	let leafRevealed = false;
+
+	function handleLeafClick() {
+		leafClicks++;
+		if (leafClicks >= 5) {
+			dropLeaf();
+			if (!leafRevealed) {
+				leafRevealed = true;
+				addNotification('info', '叶子落了，路还在。', 5000);
+			}
+		}
+	}
 </script>
 
 <ul
@@ -81,8 +97,12 @@
 
 	<li class="invisible flex-grow"></li>
 	<MenuLink>
-		<MdiStars width="24px" height="24px" slot="icon" />
-		犇站 Zephyr Ver.
+		<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
+		<span slot="icon" on:click={handleLeafClick}>
+			<MdiLeaf width="24px" height="24px" />
+		</span>
+		<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
+		<span on:click={handleLeafClick}>犇站 Defoliate Ver.</span>
 	</MenuLink>
 	<MenuLink to="/settings">
 		<MdiSettings width="24px" height="24px" slot="icon" />

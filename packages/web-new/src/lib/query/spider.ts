@@ -1,5 +1,5 @@
 import { addTask, removeTask, updateTask } from '$lib/state/notifications';
-import { PUBLIC_SPIDER_BASE } from '$env/static/public';
+import { getSpiderBase } from '$lib/config/base';
 import { cleanupAllNotifications, subscribeTasks } from './ws';
 import { browser } from '$app/environment';
 
@@ -11,7 +11,7 @@ export async function addSpiderTasks(uids: number[]) {
 	if (browser) subscribeTasks(uids);
 	let taskId = addTask('loading', '正在向爬虫请求抓取', 0, true);
 	try {
-		const result = await fetch(`${PUBLIC_SPIDER_BASE}/${uids.join(',')}`);
+		const result = await fetch(`${getSpiderBase()}/${uids.join(',')}`);
 		if (result.ok) {
 			updateTask(taskId, 'success', '成功向爬虫请求抓取。', false);
 		} else {

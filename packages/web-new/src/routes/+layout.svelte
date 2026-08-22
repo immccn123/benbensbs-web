@@ -13,8 +13,10 @@
 	import Announcement from '$lib/components/Announcement.svelte';
 	import SettingsProvider from '$lib/components/SettingsProvider.svelte';
 	import DisclaimerBox from '$lib/components/DisclaimerBox.svelte';
+	import FallingLeaves from '$lib/components/FallingLeaves.svelte';
 
 	import '$lib/redirect';
+	import '$lib/config/auto-switch';
 
 	import { pwaInfo } from 'virtual:pwa-info';
 
@@ -26,6 +28,7 @@
 </svelte:head>
 
 <NotificationStack />
+<FallingLeaves />
 <HeadTitle />
 <ShareDialog />
 <MarkdownDialog />
