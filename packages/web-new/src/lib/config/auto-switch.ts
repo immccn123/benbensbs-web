@@ -2,7 +2,6 @@ import { browser } from '$app/environment';
 import { hasManualOverride, setAutoApiBase, setAutoSpiderBase, type SwitchableKind } from './base';
 import { checkCategory, type ProbeResult } from './check';
 import { addNotification } from '$lib/state/notifications';
-import { reconnectWs } from '$lib/query/ws';
 
 const SESSION_KEY = '***';
 
@@ -33,7 +32,6 @@ const autoSwitchCategory = async (kind: SwitchableKind) => {
 		setAutoApiBase(best.line.url);
 	} else {
 		setAutoSpiderBase(best.line.url);
-		reconnectWs();
 	}
 
 	addNotification(

@@ -5,9 +5,7 @@
 		type CategoryCheckResult,
 		type ProbeResult
 	} from '$lib/config/check';
-	import { KIND_LABELS } from '$lib/config/lines';
 	import { setApiBase, setSpiderBase, resetLineOverrides } from '$lib/config/base';
-	import { reconnectWs } from '$lib/query/ws';
 	import { addNotification } from '$lib/state/notifications';
 	import MdiRefresh from '~icons/mdi/refresh';
 	import MdiSwapHorizontal from '~icons/mdi/swap-horizontal';
@@ -60,7 +58,6 @@
 			addNotification('success', `已切换 API 线路至 ${hostname(url)}`);
 		} else {
 			setSpiderBase(url);
-			reconnectWs();
 			addNotification('success', `已切换爬虫线路至 ${hostname(url)}`);
 		}
 
@@ -76,7 +73,6 @@
 
 	function reset() {
 		resetLineOverrides();
-		reconnectWs();
 		addNotification('success', '已恢复默认线路');
 		void run();
 	}

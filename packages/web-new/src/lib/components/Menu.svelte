@@ -5,12 +5,9 @@
 
 	import MdiClose from '~icons/mdi/close';
 	import MdiHomeOutline from '~icons/mdi/home-outline';
-	import MaterialAlternateEmail from '~icons/mdi/alternate-email';
 	import MdiDotsCircle from '~icons/mdi/dots-circle';
 	import MdiHistory from '~icons/mdi/history';
-	import MdiSearch from '~icons/mdi/search';
 	import MdiLeaf from '~icons/mdi/leaf';
-	import MdiEarth from '~icons/mdi/earth';
 	import MdiHubOutline from '~icons/mdi/hub-outline';
 	import MdiCompare from '~icons/mdi/compare';
 	import MdiSettings from '~icons/mdi/settings';
@@ -46,10 +43,6 @@
 		<MdiHomeOutline width="24px" height="24px" slot="icon" />
 		首页
 	</MenuLink>
-	<MenuLink to="/tools/at">
-		<MaterialAlternateEmail width="24px" height="24px" slot="icon" />
-		被 at 查询
-	</MenuLink>
 	<MenuLink to="/tools/circle">
 		<MdiDotsCircle width="24px" height="24px" slot="icon" />
 		犇圈
@@ -61,14 +54,6 @@
 	<MenuLink to="/user">
 		<MdiHistory width="24px" height="24px" slot="icon" />
 		用户历史
-	</MenuLink>
-	<MenuLink to="/search">
-		<MdiSearch width="24px" height="24px" slot="icon" />
-		高级检索
-	</MenuLink>
-	<MenuLink to="/fake_realtime">
-		<MdiEarth width="24px" height="24px" slot="icon" />
-		伪全网犇
 	</MenuLink>
 
 	<MenuLink>

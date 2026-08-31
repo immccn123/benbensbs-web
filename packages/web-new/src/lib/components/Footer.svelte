@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { createDiagnosticQuery } from '$lib/query';
 
-	const runningDays = (
-		(new Date().getTime() - new Date('2023/07/01 13:05').getTime()) /
-		(1000 * 60 * 60 * 24)
-	).toFixed();
+	// const runningDays = (
+	// 	(new Date().getTime() - new Date('2023/07/01 13:05').getTime()) /
+	// 	(1000 * 60 * 60 * 24)
+	// ).toFixed();
 
 	const diagnostic = createDiagnosticQuery();
 </script>
 
 <footer class="footer md:footer-horizontal bg-base-200 text-base-content p-10">
 	<aside>
-		<p>犇站 Version Defoliate | 已运行 {runningDays} 天</p>
+		<p>犇站 Version Defoliate | 将会运行到 &lt;1172 天</p>
 		<p>
 			Copyright &copy; 2023 - {new Date().getFullYear()}
 			<a href="https://imken.moe" class="link" target="_blank"> Imken </a>
@@ -27,8 +27,7 @@
 			</a>
 		</p>
 		<p>
-			支持我们继续做下去！
-			<a class="link-primary link link-hover" href="https://sponsor.imken.moe/"> 捐赠 </a>
+			<del>支持我们继续做下去！</del> 现在不用了
 		</p>
 		<p>
 			<code>F: {__VERSION__} ({__LASTMOD__})</code>

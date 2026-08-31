@@ -2,7 +2,6 @@
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { initialUid, isLoading } from './store';
-	import { addSpiderTask } from '$lib/query/spider';
 
 	$: uid = $initialUid ?? '';
 
@@ -31,16 +30,6 @@
 				type="submit"
 			>
 				查询
-			</button>
-			<button
-				class="btn join-item"
-				on:click={() => {
-					isFetching = true;
-					addSpiderTask(uid).finally(() => (isFetching = false));
-				}}
-				disabled={isFetching || $isLoading || uid === '' || uid === null}
-			>
-				抓取
 			</button>
 		</div>
 	</form>

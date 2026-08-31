@@ -8,12 +8,7 @@
 		contentHtml: string;
 	};
 
-	const items: Announcement[] = [
-		{
-			type: 'normal',
-			contentHtml: '欢迎加入用户讨论 QQ 群 313404608'
-		}
-	];
+	const items: Announcement[] = [];
 
 	let activeItemId = 0;
 	let interval: number | NodeJS.Timeout;

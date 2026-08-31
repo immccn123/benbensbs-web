@@ -51,6 +51,13 @@
 					</div>
 				</div>
 				<div class="main-content flex h-full flex-col">
+					<div class="alert alert-error mx-3 mt-3">
+						<p>
+							犇站将于 9 月 15 日前关闭这里的服务（加入群聊 313404608 获取最新动态）。<a class="link" href="/legal/eol">
+								详情&gt;&gt;
+							</a>
+						</p>
+					</div>
 					<Announcement />
 					<main class="z-0 p-3">
 						<slot></slot>
