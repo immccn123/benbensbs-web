@@ -1,91 +1,47 @@
 <script lang="ts">
-	import { createQuery } from '@tanstack/svelte-query';
-	import { createFetcher } from '$lib';
-	import MdiCubeScan from '~icons/mdi/cube-scan';
-	import MdiHours24 from '~icons/mdi/hours-24';
-	import MdiServer from '~icons/mdi/server';
-	import { setTitle } from '$lib/state/title';
-	import Advertising from '$lib/components/Advertising.svelte';
-	import { createDiagnosticQuery } from '$lib/query';
+	import MarkdownIt from 'markdown-it';
+	import policy from './legal/eol/policy.md?raw';
 	import PageTitle from '$lib/components/PageTitle.svelte';
+	import { setTitle } from '$lib/state/title';
 
-	const stat = createQuery<API.Stat>({
-		queryKey: ['/statistics'],
-		queryFn: createFetcher(`/statistics`),
-		refetchInterval: 10000
-	});
+	setTitle('已停止服务');
 
-	const diagnostic = createDiagnosticQuery();
-
-	setTitle('首页');
+	const md = new MarkdownIt();
 </script>
 
-<div class="mx-auto max-w-5xl px-4">
-	<PageTitle title="犇站看板" subtitle="Kanban" />
+<div class="mx-auto max-w-2xl px-6 py-16">
+	<PageTitle title="犇站已停止服务" subtitle="2023.07.01 — 2026.09.14" />
 
-	<div class="mb-10">
-		<div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-			<div>
-				<div
-					class="mb-3 flex items-center gap-1.5 text-sm font-medium tracking-wide uppercase opacity-60"
-				>
-					<MdiCubeScan class="text-primary" />
-					累计保存的犇犇
-				</div>
-				{#if $stat.isLoading}
-					<span class="loading loading-ring loading-lg"></span>
-				{:else if $stat.isSuccess}
-					<div class="text-primary text-6xl font-light tracking-tighter tabular-nums">
-						{$stat.data.total_count.toLocaleString()}
-					</div>
-					<div class="mt-2 text-xs opacity-40">
-						{new Date('2023/07/01 13:05').toLocaleDateString()} — {new Date().toLocaleDateString()}
-					</div>
-				{:else}
-					<span class="text-error text-base">加载失败</span>
-				{/if}
-			</div>
-
-			<div>
-				<div
-					class="mb-3 flex items-center gap-1.5 text-sm font-medium tracking-wide uppercase opacity-60"
-				>
-					<MdiHours24 class="text-info" />
-					近 24 小时新增
-				</div>
-				{#if $stat.isLoading}
-					<span class="loading loading-ring loading-lg"></span>
-				{:else if $stat.isSuccess}
-					<div class="text-info text-6xl font-light tracking-tighter tabular-nums">
-						--,---
-					</div>
-					<div class="mt-2 text-xs opacity-40">
-						截至 {new Date().toLocaleString()}
-					</div>
-				{:else}
-					<span class="text-error text-base">加载失败</span>
-				{/if}
-			</div>
-		</div>
-
-		<div class="mt-6 flex items-center gap-1.5 text-xs opacity-60">
-			<MdiServer />
-			后端服务状态
-			{#if $diagnostic.isLoading}
-				<span class="loading loading-ring loading-xs"></span>
-			{:else if $diagnostic.isSuccess}
-				{@const up = $diagnostic.data.database === 'up' && $diagnostic.data.redis === 'up'}
-				<span class={up ? 'text-success' : 'text-error'}>{up ? '正常' : '离线'}</span>
-			{:else}
-				未知
-			{/if}
-		</div>
+	<div class="space-y-4 text-sm leading-relaxed">
+		<p>
+			一些操作建议：<br /><br />
+			<span class="font-medium">如果你是依赖犇站接口（查询、SSO、OLSI）提供服务的人</span
+			>：接口会在 2026-09-21 前关闭，请尽快迁移或下线相关服务。<br />
+			<span class="font-medium">如果你是普通访客</span>：无需进行任何操作。<br />
+			<span class="font-medium">如果你需要自己的历史数据</span>：请在 2027-03-30
+			数据库销毁前前往 OLSI（<a
+				target="_blank"
+				class="link link-primary"
+				href="https://olsi.benben.sbs/export">https://olsi.benben.sbs/export</a
+			>）下载个人数据。<br />
+			<span class="font-medium">如果你对源代码感兴趣</span>：全部代码会在 2026
+			国庆假期公开，可加入犇站群聊关注后续发布。
+		</p>
 	</div>
 
-	<div>
-		<h2 class="border-base-200 mb-4 border-b pb-1 text-base font-semibold">广告</h2>
-		<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-			<Advertising />
-		</div>
-	</div>
+	<p class="mt-8 text-sm">
+		以上信息可能随时更改，这里的更新可能不及时。请<a
+			class="link link-hover"
+			href="https://qm.qq.com/q/fDtSK1z77W"
+			target="_blank"
+		>
+			加群 313404608{' '}
+		</a>获取最新动态。
+	</p>
+
+	<div class="divider my-8"></div>
+
+	<article class="prose max-w-none">
+		{@html md.render(policy)}
+	</article>
 </div>
